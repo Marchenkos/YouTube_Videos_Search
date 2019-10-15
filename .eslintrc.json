@@ -42,6 +42,9 @@
         "no-var":"error",
         "import/prefer-default-export":"off",
         "max-len":["error", 200],
-        "linebreak-style": ["error", "windows"]
+        "linebreak-style": ["error", "windows"],
+        "react/jsx-indent":"off",
+        "react/prefer-stateless-function": "off",
+        "comma-dangle": "off"
     }
 }
