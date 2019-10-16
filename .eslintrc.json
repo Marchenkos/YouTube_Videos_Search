@@ -1,14 +1,21 @@
 {   "parser": "babel-eslint",
-
+    "overrides": [
+        {
+            "files": ["*-test.js","*.spec.js"],
+            "rules": {
+                "no-unused-expressions": "off"
+            }
+        }
+    ],
     "env": {
         "browser": true,
         "commonjs": true,
         "node": true,
+        "jest": true,
         "es6": true
     },
     "extends": [
-        "airbnb",
-        "plugin:react-redux/recommended"
+        "airbnb"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -18,7 +25,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
+        "ecmaVersion": 6,
         "sourceType": "module"
     },
     "plugins": [
@@ -30,21 +37,18 @@
         "no-console":"off",
         "semi-spacing": ["error", {"before": false, "after": true}],
         "quotes": ["error", "double"],
-        "no-plusplus":"off",
-        "no-unused-vars":"off",
-        "max-classes-per-file":"off", 
-        "prefer-rest-params":"off", 
-        "eqeqeq":"off",
-        "no-restricted-syntax": "off",
         "indent":["error", 4],
         "no-trailing-spaces":"error",
         "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
         "no-var":"error",
-        "import/prefer-default-export":"off",
         "max-len":["error", 200],
         "linebreak-style": ["error", "windows"],
         "react/jsx-indent":"off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prefer-stateless-function": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/no-array-index-key": "warn"
     }
 }

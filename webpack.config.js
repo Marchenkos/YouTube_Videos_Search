@@ -12,7 +12,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"],
+                use: ["babel-loader", "eslint-loader"],
             },
             {
                 test: /\.less$/,
@@ -28,6 +28,32 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: "style-loader",
+                    },
+                    {
+                        loader: "css-loader",
+                    }
+                ],
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                use: [
+                    {
+                        loader: "file-loader?name=./assets/fonts/webfonts/[name].[ext]"
+                    },
+                    {
+                        loader: "file-loader?name=./assets/fonts/Roboto/[name].[ext]"
+                    }
+                ],
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: ["file-loader"]
+            }
         ],
     },
     plugins: [
