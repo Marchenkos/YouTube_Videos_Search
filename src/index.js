@@ -7,6 +7,7 @@ import rootReducer from "./reducers/rootReducer";
 import App from "./App";
 import "./style/body.less";
 
+
 const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(

@@ -48,6 +48,7 @@
         "comma-dangle": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
+        "spaced-comment":"off",
         "react/no-array-index-key": "warn"
     }
 }
