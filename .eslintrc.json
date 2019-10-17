@@ -1,0 +1,54 @@
+{   "parser": "babel-eslint",
+    "overrides": [
+        {
+            "files": ["*-test.js","*.spec.js"],
+            "rules": {
+                "no-unused-expressions": "off"
+            }
+        }
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true,
+        "jest": true,
+        "es6": true
+    },
+    "extends": [
+        "airbnb"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-redux"
+    ],
+    "rules": {
+        "react-redux/connect-prefer-named-arguments": 2,
+        "no-console":"off",
+        "semi-spacing": ["error", {"before": false, "after": true}],
+        "quotes": ["error", "double"],
+        "indent":["error", 4],
+        "no-trailing-spaces":"error",
+        "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
+        "no-var":"error",
+        "max-len":["error", 200],
+        "react/jsx-indent":"off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/prefer-stateless-function": "off",
+        "comma-dangle": "off",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "spaced-comment":"off",
+        "react/no-array-index-key": "warn"
+    }
+}
