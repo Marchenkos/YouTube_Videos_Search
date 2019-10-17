@@ -42,13 +42,12 @@
         "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
         "no-var":"error",
         "max-len":["error", 200],
-        "linebreak-style": ["error", "windows"],
         "react/jsx-indent":"off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prefer-stateless-function": "off",
         "comma-dangle": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
-        "react/no-array-index-key": "warn",
+        "react/no-array-index-key": "warn"
     }
 }
