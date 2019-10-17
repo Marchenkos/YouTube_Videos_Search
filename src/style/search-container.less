@@ -1,6 +1,10 @@
 @white: #ffffff;
 @gray: #8d8d8d;
-
+.without-background {
+    background: none;
+    border:none;
+    color: @white;
+}
 .search-container{ 
     flex-grow: 1;
     text-align: end;
@@ -8,10 +12,8 @@
         width: 250px;
         position: relative;
         margin-right: 15px;
-        background: none;
-        border:none;
+        .without-background;
         border-bottom: 1px @white solid;
-        color: @white;        
         font-size: 17px;
         outline: none;
         transition: .4s linear;
@@ -25,6 +27,7 @@
 
     .search-container__search-button {
         vertical-align: bottom;
+        .without-background;
         font-size: 22px;
         cursor: pointer;
     }

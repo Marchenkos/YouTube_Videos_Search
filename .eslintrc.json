@@ -48,6 +48,11 @@
         "comma-dangle": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
-        "react/no-array-index-key": "warn"
+        "react/no-array-index-key": "warn",
+        "arrow-body-style": "off",
+        "arrow-parens":"off",
+        "react/destructuring-assignment": "off",
+        "react/prop-types": "off",
+        "jsx-a11y/control-has-associated-label": "off"
     }
 }

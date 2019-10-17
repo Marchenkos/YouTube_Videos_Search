@@ -1,6 +1,18 @@
-const defaultState = {
+import { ENTER_VIDEO_NAME } from "../actions/enterVideoNameActions";
 
+const defaultState = {
+    videoName: "",
+    listOfVideo: []
 };
 
-// eslint-disable-next-line no-unused-vars
-export default function rootReducer(state = defaultState, action) {}
+export default function rootReducer(state = defaultState, action) {
+    switch (action.type) {
+    case ENTER_VIDEO_NAME:
+        return {
+            ...state,
+            videoName: action.value
+        };
+    default:
+        return state;
+    }
+}
