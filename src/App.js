@@ -1,11 +1,10 @@
 import React from "react";
-import TodoListContainer from "./containers/TodoListContainer";
+import Header from "./components/Header";
 
-// eslint-disable-next-line react/prefer-stateless-function
 export default class App extends React.Component {
     render() {
         return (
-            <TodoListContainer />
+            <Header />
         );
     }
 }
