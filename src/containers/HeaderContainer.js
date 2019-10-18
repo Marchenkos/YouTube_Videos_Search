@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { enterVideoName } from "../actions/enterVideoNameActions";
 import Header from "../components/Header";
+import loadClient from "../Api/getData";
 
 const mapStateToProps = state => {
     return {
@@ -11,7 +12,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitVideo: name => dispatch(enterVideoName(name))
+        onSubmitVideo: name => dispatch(enterVideoName(name)),
+        onGetData: () => {
+            const asyncGetData = () => {
+                return dispatch => {
+                    setTimeout( () => )
+
+                }
+            }}
     };
 };
 
