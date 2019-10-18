@@ -3,7 +3,9 @@ import gapi from "gapi-client";
 function execute(keyword) {
     return gapi.client.youtube.search.list({
         part: "snippet",
-        type: keyword
+        q: keyword,
+        type: "video",
+        pageToken: "CAUQAA"
     })
         .then((response) => {
             console.log("Response", response);

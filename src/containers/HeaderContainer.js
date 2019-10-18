@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { enterVideoName } from "../actions/enterVideoNameActions";
+import { onSubmitVideo } from "../actions/onSubmitVideoActions";
 import Header from "../components/Header";
 
 const mapStateToProps = state => {
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitVideo: name => dispatch(enterVideoName(name))
+        onSubmitVideo: name => dispatch(onSubmitVideo(name))
     };
 };
 
