@@ -3,7 +3,8 @@ import gapi from "gapi-client";
 function execute(keyword) {
     return gapi.client.youtube.search.list({
         part: "snippet",
-        type: keyword
+        type: "video",
+        q: keyword
     })
         .then((response) => {
             console.log("Response", response);
