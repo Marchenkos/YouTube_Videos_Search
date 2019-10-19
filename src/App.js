@@ -1,9 +1,10 @@
 import React from "react";
+import Header from "./components/Header";
 
 export default class App extends React.Component {
     render() {
-        //return components
-        // eslint-disable-next-line no-useless-return
-        return;
+        return (
+            <Header />
+        );
     }
 }
