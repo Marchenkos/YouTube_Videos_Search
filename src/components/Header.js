@@ -3,13 +3,12 @@ import Search from "./Search";
 import "../style/header-container.less";
 import "../style/logo.less";
 import logoPng from "../img/icon_youTube.png";
-import loadClient from "../Api/getData";
 
 export default class Header extends React.Component {
     onSubmitVideoName = (e, videoName) => {
         e.preventDefault();
         this.props.onSubmitVideo(videoName);
-        loadClient(videoName);
+        this.props.onGetData(videoName, this.props.nextPage);
     };
 
     render() {

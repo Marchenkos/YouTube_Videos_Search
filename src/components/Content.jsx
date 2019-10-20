@@ -7,6 +7,7 @@ export default class Content extends React.Component {
         return (
             <main>
                 <ul>
+                    <Video />
                 </ul>
             </main>
         );

@@ -8,9 +8,11 @@ export const enterVideoName = (value) => {
     };
 };
 
-export const asyncGetData = (list) => {
+export const asyncGetData = (videoList, nextPage, totalResult) => {
     return {
         type: ASYNC_GET_DATA,
-        listOfData: list
+        videoList,
+        nextPage,
+        totalResult
     };
 };

@@ -1,8 +1,10 @@
-import { ENTER_VIDEO_NAME } from "../actions/enterVideoNameActions";
+import { ENTER_VIDEO_NAME, ASYNC_GET_DATA } from "../actions/enterVideoNameActions";
 
 const defaultState = {
     videoName: "",
-    listOfVideo: []
+    listOfVideo: [],
+    totalResult: 0,
+    nextPage: ""
 };
 
 export default function rootReducer(state = defaultState, action) {
@@ -10,7 +12,14 @@ export default function rootReducer(state = defaultState, action) {
     case ENTER_VIDEO_NAME:
         return {
             ...state,
-            videoName: action.value
+            videoName: action.name
+        };
+    case ASYNC_GET_DATA:
+        return {
+            ...state,
+            listOfVideo: action.videoList,
+            totalResult: action.nextPage,
+            nextPage: action.totalResult
         };
     default:
         return state;
