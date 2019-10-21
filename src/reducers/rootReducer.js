@@ -1,17 +1,26 @@
-import { ON_SUBMIT_VIDEO } from "../actions/onSubmitVideoActions";
+import { ENTER_VIDEO_NAME } from "../actions/enterVideoNameActions";
+import { ADD_VIDEO } from "../actions/addVideoElementActions";
 
 const defaultState = {
     videoName: "",
-    listOfVideo: []
+    listOfVideo: [],
+    totalResult: 0,
+    nextPage: ""
 };
 
 export default function rootReducer(state = defaultState, action) {
-    console.log(action.name);
     switch (action.type) {
-    case ON_SUBMIT_VIDEO:
+    case ENTER_VIDEO_NAME:
         return {
             ...state,
             videoName: action.name
+        };
+    case ADD_VIDEO:
+        return {
+            ...state,
+            listOfVideo: [...state.listOfVideo, action.video],
+            totalResult: action.nextPage,
+            nextPage: action.totalResult
         };
     default:
         return state;
