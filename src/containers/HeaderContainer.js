@@ -1,15 +1,14 @@
 import { connect } from "react-redux";
-import { enterVideoName } from "../actions/enterVideoNameActions";
-import { addVideo } from "../actions/addVideoElementActions";
+import { enterVideoName } from "../actions/getVideoElementActions";
+import getVideoAsync from "../actions/getVideoAsyncActions";
 import Header from "../components/Header";
-import loadClient from "../Api/getData";
 
 const mapStateToProps = state => {
     return {
-        videoName: state.videoName,
-        listOfVideo: state.listOfVideo,
-        totalResult: state.totalResult,
-        nextPage: state.nextPage
+        videoName: state.video.videoName,
+        listOfVideo: state.video.listOfVideo,
+        totalResult: state.metadata.totalResult,
+        nextPage: state.metadata.nextPage
     };
 };
 
@@ -17,11 +16,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onSubmitVideo: name => dispatch(enterVideoName(name)),
         onGetData: (videoName, nextPage) => {
-            const getVideo = () => {
-                loadClient(videoName, nextPage, (video, result) => dispatch(addVideo(video, result)));
-            };
-
-            getVideo();
+            getVideoAsync(videoName, nextPage, dispatch);
         }
     };
 };

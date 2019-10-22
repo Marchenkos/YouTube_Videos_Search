@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function VideoRating(props) {
+export default function VideoRating({ value: { viewCount, commentCount, likeCount } }) {
     return (
         <div className="rating-information">
             <div className="rating-information__likes">
@@ -8,7 +8,7 @@ export default function VideoRating(props) {
                     лайки
                 </span>
                 <span className="item__count">
-                    {props.value.likeCount}
+                    {likeCount}
                 </span>
             </div>
             <div className="rating-information__views">
@@ -16,7 +16,7 @@ export default function VideoRating(props) {
                     просмотры
                 </span>
                 <span className="item__count">
-                    {props.value.viewCount}
+                    {viewCount}
                 </span>
             </div>
             <div className="rating-information__comments">
@@ -24,7 +24,7 @@ export default function VideoRating(props) {
                     комменты
                 </span>
                 <span className="item__count">
-                    {props.value.commentCount}
+                    {commentCount}
                 </span>
             </div>
         </div>

@@ -1,28 +1,8 @@
-import { ENTER_VIDEO_NAME } from "../actions/enterVideoNameActions";
-import { ADD_VIDEO } from "../actions/addVideoElementActions";
+import { combineReducers } from "redux";
+import metadataReducer from "./metadataReducer";
+import videoReducer from "./videoReducer";
 
-const defaultState = {
-    videoName: "",
-    listOfVideo: [],
-    totalResult: 0,
-    nextPage: ""
-};
-
-export default function rootReducer(state = defaultState, action) {
-    switch (action.type) {
-    case ENTER_VIDEO_NAME:
-        return {
-            ...state,
-            videoName: action.name
-        };
-    case ADD_VIDEO:
-        return {
-            ...state,
-            listOfVideo: [...state.listOfVideo, action.video],
-            totalResult: action.nextPage,
-            nextPage: action.totalResult
-        };
-    default:
-        return state;
-    }
-}
+export default combineReducers({
+    video: videoReducer,
+    metadata: metadataReducer
+});

@@ -53,6 +53,8 @@
         "arrow-parens":"off",
         "react/destructuring-assignment": "off",
         "react/prop-types": "off",
-        "jsx-a11y/control-has-associated-label": "off"
+        "jsx-a11y/control-has-associated-label": "off",
+        "no-alert":"off",
+        "object-curly-newline":"off"
     }
 }

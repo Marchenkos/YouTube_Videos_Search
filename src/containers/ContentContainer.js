@@ -3,7 +3,7 @@ import Content from "../components/Content";
 
 const mapStateToProps = state => {
     return {
-        listOfVideo: state.listOfVideo,
+        listOfVideo: state.video.listOfVideo,
     };
 };
 

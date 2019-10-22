@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function ChannelInformation(props) {
+export default function ChannelInformation({ value: { channelIcon, channelName } }) {
     return (
         <div className="channel-information">
-            <img src={props.value.channelIcon} alt="uderIcon" className="channel-information__icon" />
-            <h2 className="channel-information__channel-name">{props.value.channelName}</h2>
+            <img src={channelIcon} alt="uderIcon" className="channel-information__icon" />
+            <h2 className="channel-information__channel-name">{channelName}</h2>
         </div>
     );
 }
