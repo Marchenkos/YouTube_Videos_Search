@@ -5,7 +5,7 @@ export default function VideoRating({ value: { viewCount, commentCount, likeCoun
         <div className="rating-information">
             <div className="rating-information__likes">
                 <span className="item__icon">
-                    лайки
+                    likes
                 </span>
                 <span className="item__count">
                     {likeCount}
@@ -13,7 +13,7 @@ export default function VideoRating({ value: { viewCount, commentCount, likeCoun
             </div>
             <div className="rating-information__views">
                 <span className="item__icon">
-                    просмотры
+                    views
                 </span>
                 <span className="item__count">
                     {viewCount}
@@ -21,7 +21,7 @@ export default function VideoRating({ value: { viewCount, commentCount, likeCoun
             </div>
             <div className="rating-information__comments">
                 <span className="item__icon">
-                    комменты
+                    comments
                 </span>
                 <span className="item__count">
                     {commentCount}

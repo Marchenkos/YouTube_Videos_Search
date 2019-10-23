@@ -5,17 +5,22 @@ import "../style/search-container.less";
 export default function Search(props) {
     const context = props;
     const inputEl = useRef(null);
-    const submitVideoName = debounce((e) => {
+    const submitVideoWithDelay = debounce(e => {
+        console.log(context.value, inputEl.current.value);
+        if (context.value !== inputEl.current.value) {
+            context.onClearVideoList();
+            context.handleSubmit(e, inputEl.current.value);
+        }
+    }, 2000);
+    const submitVideo = useCallback(e => {
+        context.onClearVideoList();
         context.handleSubmit(e, inputEl.current.value);
-    }, 3000);
-    const submitVideoFromThreeSeconds = useCallback((e) => {
-        context.handleSubmit(e, inputEl.current.value);
-    }, [props.value]);
+    }, []);
 
     return (
         <div className="search-container">
-            <input className="search-container__searching-line" type="text" ref={inputEl} onChange={submitVideoFromThreeSeconds} placeholder="Search..." />
-            <button type="submit" className="icon-search search-container__search-button" onClick={submitVideoName} />
+            <input className="search-container__searching-line" type="text" ref={inputEl} onChange={submitVideoWithDelay} placeholder="Search..." />
+            <button type="submit" className="icon-search search-container__search-button" onClick={submitVideo} />
         </div>
     );
 }

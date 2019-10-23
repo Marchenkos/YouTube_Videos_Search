@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import gapi from "gapi-client";
 
 function getChannel(video) {
@@ -6,7 +5,7 @@ function getChannel(video) {
         part: "snippet",
         id: video.channelId
     })
-        .then((response) => {
+        .then(response => {
             const channelInformation = {
                 channelIcon: response.result.items[0].snippet.thumbnails.default.url,
                 channelName: response.result.items[0].snippet.localized.title
@@ -23,7 +22,7 @@ function getStatistics(video) {
         part: "statistics",
         id: video.id
     })
-        .then((response) => {
+        .then(response => {
             const videoStatistic = {
                 viewCount: response.result.items[0].statistics.viewCount,
                 likeCount: response.result.items[0].statistics.likeCount,
@@ -37,24 +36,21 @@ function getStatistics(video) {
         });
 }
 
-function searchVideo(keyword, nextPage) {
+function searchVideo(keyword) {
     return gapi.client.youtube.search.list({
         part: "snippet",
         type: "video",
-        q: keyword,
-        pageToken: nextPage
+        q: keyword
     })
-        .then((response) => {
-            const videoList = response.result.items.map((item) => {
+        .then(response => {
+            const videoList = response.result.items.map(item => {
                 return {
-                    video: {
-                        description: item.snippet.description,
-                        channelId: item.snippet.channelId,
-                        id: item.id.videoId,
-                        title: item.snippet.title,
-                        preview: item.snippet.thumbnails.high.url,
-                        datePublication: item.snippet.publishedAt
-                    }
+                    description: item.snippet.description,
+                    channelId: item.snippet.channelId,
+                    id: item.id.videoId,
+                    title: item.snippet.title,
+                    preview: item.snippet.thumbnails.high.url,
+                    datePublication: item.snippet.publishedAt
                 };
             });
             const paramOfPage = {
@@ -69,25 +65,27 @@ function searchVideo(keyword, nextPage) {
         });
 }
 
-export default function loadClient(keyword, nextPage, dispatch) {
-    gapi.client.setApiKey("AIzaSyBB3LIF_f6Z6IIJuU46SecNkzsWYYlIGrc");
+export default function loadClient(keyword, nextPage, onSuccess, onError) {
+    gapi.client.setApiKey("AIzaSyAdL-Ay79HwcaxCVmAFDLPPZabwOxF5Pf8");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(() => { console.log("GAPI client loaded for API"); })
         .then(() => {
-                        searchVideo(keyword, nextPage)
-                        .then(({ videoList, paramOfPage }) => {
-                            videoList.forEach(item => getStatistics(item.video)
-                                .then(videoWithStatistic => getChannel(videoWithStatistic)
-                                    .then(videoWithChannel => {
-                                        dispatch(videoWithChannel, paramOfPage);
-                                    })));
-                        });
+            return searchVideo(keyword, nextPage)
+                .then(({ videoList, paramOfPage }) => {
+                    videoList.forEach(item => getStatistics(item)
+                        .then(videoWithStatistic => getChannel(videoWithStatistic)
+                            .then(videoWithChannel => {
+                                onSuccess(videoWithChannel);
+                            })));
+                    return paramOfPage;
+                });
         })
-        .catch(() => {
-            alert("Ошибка при получении данных");
+        .catch(error => {
+            alert("En error occurred while getting data");
+            onError(error);
         });
 }
 
 gapi.load("client", () => {
-    gapi.client.init({ apiKey: "AIzaSyBB3LIF_f6Z6IIJuU46SecNkzsWYYlIGrc" });
+    gapi.client.init({ apiKey: "AIzaSyAdL-Ay79HwcaxCVmAFDLPPZabwOxF5Pf8" });
 });

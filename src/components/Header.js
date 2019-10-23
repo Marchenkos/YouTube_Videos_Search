@@ -12,6 +12,8 @@ export default class Header extends React.Component {
     };
 
     render() {
+        const context = this.props;
+
         return (
             <div className="header-container">
                 <div className="logo">
@@ -21,7 +23,7 @@ export default class Header extends React.Component {
                         YouTube
                     </span>
                 </div>
-                <Search handleSubmit={this.onSubmitVideoName} value={this.videoName} />
+                <Search handleSubmit={this.onSubmitVideoName} onClearVideoList={context.onClearVideoList} value={context.videoName} />
             </div>
         );
     }

@@ -1,10 +1,17 @@
-import { addVideo } from "./getVideoElementActions";
 import { getMetadata } from "./getMetadataActions";
+import { addVideo } from "./getVideoElementActions";
+import { addError } from "./addErrorActions";
 import loadClient from "../Api/getData";
 
-export default function getVideoAsync(videoName, nextPage, dispatch) {
-    loadClient(videoName, nextPage, (video, result) => {
-        dispatch(addVideo(video));
-        dispatch(getMetadata(result));
-    });
-}
+export const getVideoAsync = (videoName, nextPage) => {
+    return dispatch => {
+        return loadClient(videoName, nextPage, video => {
+            dispatch(addVideo(video));
+        }, error => {
+            dispatch(addError(error));
+        })
+            .then(paramOfPage => {
+                dispatch(getMetadata(paramOfPage));
+            });
+    };
+};
