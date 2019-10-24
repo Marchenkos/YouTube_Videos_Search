@@ -1,27 +1,31 @@
+@mobile: ~"(max-width: 600px)";
+
 .video-container {
-    width: 30%;
+    background: #ffffff;
+    overflow: hidden;
+    margin-top:40px;
+
 
     .video-container__description-container{
-        background: #ffffff;
         padding: 20px;
         width: 100%;
 
         .video-description__title{
             font-size: 20px;
-            margin-bottom: 10px;
+            max-width: 420px;
+            margin-bottom: 20px;
         }
 
         .video-description__description{
             color:#4e4e4e;
+            padding-right: 10px;
+            max-width: 450px;
             font-size: 17px;
         }
     }
 
     .video-container__preview {
-        // width: 300px;
+        width: 100%;
     }
 
-    .video-description__date-publication{
-        color: #464646;
-    }
 }

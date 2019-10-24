@@ -1,5 +1,8 @@
 @white: #ffffff;
 @gray: #8d8d8d;
+@desktop: ~"(min-width: 820px)";
+@mobile: ~"(max-width: 600px)";
+
 .without-background {
     background: none;
     border:none;
@@ -8,6 +11,7 @@
 .search-container{ 
     flex-grow: 1;
     text-align: end;
+
     .search-container__searching-line{
         width: 250px;
         position: relative;
@@ -19,9 +23,15 @@
         transition: .4s linear;
         .placeholder(@white);
 
-        &:focus {
-            width: 500px;
-            .placeholder(@gray);
+        @media @desktop {
+            &:focus {
+                width: 450px;
+                .placeholder(@gray);
+            }
+        }
+
+        @media @mobile {
+            width: 150px;
         }
     }
 
@@ -30,6 +40,11 @@
         .without-background;
         font-size: 22px;
         cursor: pointer;
+
+        @media @mobile {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
     }
 }
 
@@ -40,5 +55,4 @@
     &:-moz-placeholder {
         color: @color;
     }
-   
 }
