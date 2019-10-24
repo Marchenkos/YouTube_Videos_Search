@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { enterVideoName, clearVideoList } from "../actions/getVideoElementActions";
-import { getVideoAsync } from "../actions/getVideoAsyncActions";
+import { enterVideoName, clearVideoList, getVideoAsync } from "../actions/getVideoElementActions";
+
 import Header from "../components/Header";
 
 const mapStateToProps = state => {
