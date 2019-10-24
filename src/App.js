@@ -1,10 +1,14 @@
 import React from "react";
-import Header from "./components/Header";
+import HeaderContainer from "./containers/HeaderContainer";
+import ContentConatiner from "./containers/ContentContainer";
 
 export default class App extends React.Component {
     render() {
         return (
-            <Header />
+            <div>
+                <HeaderContainer />
+                <ContentConatiner />
+            </div>
         );
     }
 }

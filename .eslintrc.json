@@ -38,6 +38,7 @@
         "semi-spacing": ["error", {"before": false, "after": true}],
         "quotes": ["error", "double"],
         "indent":["error", 4],
+        "import/prefer-default-export": "off",
         "no-trailing-spaces":"error",
         "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
         "no-var":"error",
@@ -48,7 +49,13 @@
         "comma-dangle": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
-        "spaced-comment":"off",
-        "react/no-array-index-key": "warn"
+        "react/no-array-index-key": "off",
+        "arrow-body-style": "off",
+        "arrow-parens":"off",
+        "react/destructuring-assignment": "off",
+        "react/prop-types": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "no-alert":"off",
+        "object-curly-newline":"off"
     }
 }

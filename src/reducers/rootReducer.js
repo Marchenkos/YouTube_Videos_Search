@@ -1,6 +1,10 @@
-const defaultState = {
+import { combineReducers } from "redux";
+import metadataReducer from "./metadataReducer";
+import videoReducer from "./videoReducer";
+import errorReducer from "./erorReducer";
 
-};
-
-// eslint-disable-next-line no-unused-vars
-export default function rootReducer(state = defaultState, action) {}
+export default combineReducers({
+    video: videoReducer,
+    metadata: metadataReducer,
+    error: errorReducer
+});
