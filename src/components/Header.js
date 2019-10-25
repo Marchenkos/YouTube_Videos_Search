@@ -4,27 +4,23 @@ import "../style/header-container.less";
 import "../style/logo.less";
 import logoPng from "../img/icon_youTube.png";
 
-export default class Header extends React.Component {
-    onSubmitVideoName = (e, videoName) => {
+export default function Header({ nextPage, onGetData, onSubmitVideo, onClearVideoList }) {
+    const onSubmitVideoName = (e, videoName) => {
         e.preventDefault();
-        this.props.onSubmitVideo(videoName);
-        this.props.onGetData(videoName, this.props.nextPage);
+        onSubmitVideo(videoName);
+        onGetData(videoName, nextPage);
     };
 
-    render() {
-        const context = this.props;
-
-        return (
-            <div className="header-container">
-                <div className="logo">
-                    <img src={logoPng} className="logo__picture" alt="YouTube" />
-                    <span className="logo__caption">
-                        <p className="item__mini-title">Mini</p>
-                        YouTube
-                    </span>
-                </div>
-                <Search handleSubmit={this.onSubmitVideoName} onClearVideoList={context.onClearVideoList} value={context.videoName} />
+    return (
+        <div className="header-container">
+            <div className="logo">
+                <img src={logoPng} className="logo__picture" alt="YouTube" />
+                <span className="logo__caption">
+                    <p className="item__mini-title">Mini</p>
+                    YouTube
+                </span>
             </div>
-        );
-    }
+            <Search handleSubmit={onSubmitVideoName} onClear={onClearVideoList} />
+        </div>
+    );
 }

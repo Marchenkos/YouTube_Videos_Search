@@ -6,9 +6,10 @@ function getChannel(video) {
         id: video.channelId
     })
         .then(response => {
+            const { snippet } = response.result.items[0];
             const channelInformation = {
-                channelIcon: response.result.items[0].snippet.thumbnails.default.url,
-                channelName: response.result.items[0].snippet.localized.title
+                channelIcon: snippet.thumbnails.default.url,
+                channelName: snippet.localized.title
             };
             const videoElement = video;
             videoElement.channelInformation = channelInformation;
@@ -23,11 +24,11 @@ function getStatistics(video) {
         id: video.id
     })
         .then(response => {
+            const { statistics } = response.result.items[0];
             const videoStatistic = {
-                viewCount: response.result.items[0].statistics.viewCount,
-                likeCount: response.result.items[0].statistics.likeCount,
-                dislikeCount: response.result.items[0].statistics.dislikeCount,
-                commentCount: response.result.items[0].statistics.commentCount
+                viewCount: statistics.viewCount,
+                likeCount: statistics.likeCount,
+                commentCount: statistics.commentCount
             };
             const videoElement = video;
             videoElement.videoStatistic = videoStatistic;
@@ -44,13 +45,14 @@ function searchVideo(keyword) {
     })
         .then(response => {
             const videoList = response.result.items.map(item => {
+                const { snippet } = item;
                 return {
-                    description: item.snippet.description,
-                    channelId: item.snippet.channelId,
+                    description: snippet.description,
+                    channelId: snippet.channelId,
                     id: item.id.videoId,
-                    title: item.snippet.title,
-                    preview: item.snippet.thumbnails.high.url,
-                    datePublication: item.snippet.publishedAt
+                    title: snippet.title,
+                    preview: snippet.thumbnails.high.url,
+                    datePublication: snippet.publishedAt
                 };
             });
             const paramOfPage = {

@@ -2,19 +2,17 @@ import React, { useCallback, useRef } from "react";
 import debounce from "lodash.debounce";
 import "../style/search-container.less";
 
-export default function Search(props) {
-    const context = props;
+export default function Search({ onClear, handleSubmit }) {
     const inputEl = useRef(null);
+
     const submitVideoWithDelay = debounce(e => {
-        console.log(context.value, inputEl.current.value);
-        if (context.value !== inputEl.current.value) {
-            context.onClearVideoList();
-            context.handleSubmit(e, inputEl.current.value);
-        }
-    }, 2000);
+        onClear();
+        handleSubmit(e, inputEl.current.value);
+    }, 1500);
+
     const submitVideo = useCallback(e => {
-        context.onClearVideoList();
-        context.handleSubmit(e, inputEl.current.value);
+        onClear();
+        handleSubmit(e, inputEl.current.value);
     }, []);
 
     return (

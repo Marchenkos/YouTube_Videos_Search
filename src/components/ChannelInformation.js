@@ -1,7 +1,7 @@
+/* eslint-disable spaced-comment */
 import React from "react";
 import "../style/channel-information.less";
-import "../style/description.less";
-
+//react prop-types
 export default function ChannelInformation({ value: { channelIcon, channelName }, date }) {
     return (
         <div className="channel-information">
