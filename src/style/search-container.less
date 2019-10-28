@@ -32,18 +32,23 @@
 
         @media @mobile {
             width: 150px;
+            float: left;
+            margin-left: 30%;
         }
     }
 
     .search-container__search-button {
         vertical-align: bottom;
+        display: none;
         .without-background;
         font-size: 22px;
         cursor: pointer;
 
         @media @mobile {
+            display: block;
             font-size: 30px;
             margin-bottom: 5px;
+            margin-left: 90%;
         }
     }
 }

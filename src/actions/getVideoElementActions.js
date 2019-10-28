@@ -26,9 +26,9 @@ export const clearVideoList = () => {
     };
 };
 
-export const getVideoAsync = (videoName, nextPage) => {
+export const getVideoAsync = (videoName, nextPageToken) => {
     return dispatch => {
-        return loadClient(videoName, nextPage, video => {
+        return loadClient(videoName, nextPageToken, video => {
             dispatch(addVideo(video));
         }, error => {
             dispatch(addError(error));

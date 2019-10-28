@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ChannelInformation from "./ChannelInformation";
 import VideoRating from "./VideoRating";
 import "../style/video-container.less";
@@ -25,3 +26,21 @@ export default function Video({ value: { preview, title, description, datePublic
         </div>
     );
 }
+
+Video.propTypes = {
+    preview: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    datePublication: PropTypes.string,
+    channelInformation: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    videoStatistic: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+};
+
+Video.defaultProps = {
+    preview: "../img/no_video.jpg",
+    title: "Without name",
+    description: "",
+    datePublication: "00.00.00",
+    channelInformation: PropTypes.objectOf(PropTypes.string),
+    videoStatistic: PropTypes.objectOf(PropTypes.number)
+};

@@ -1,7 +1,7 @@
-/* eslint-disable spaced-comment */
 import React from "react";
+import PropTypes from "prop-types";
 import "../style/channel-information.less";
-//react prop-types
+
 export default function ChannelInformation({ value: { channelIcon, channelName }, date }) {
     return (
         <div className="channel-information">
@@ -13,3 +13,19 @@ export default function ChannelInformation({ value: { channelIcon, channelName }
         </div>
     );
 }
+
+ChannelInformation.propTypes = {
+    value: PropTypes.shape({
+        channelIcon: PropTypes.string,
+        channelName: PropTypes.string
+    }),
+    date: PropTypes.string
+};
+
+ChannelInformation.defaultProps = {
+    date: "00.00.00",
+    value: {
+        channelName: "anonim",
+        channelIcon: "../img/no_photo.jpg"
+    }
+};
