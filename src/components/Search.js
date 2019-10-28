@@ -9,7 +9,6 @@ export default function Search({ onClear, handleSubmit }) {
     const inputEl = useRef(null);
 
     useEffect(() => {
-        console.log(window.innerWidth);
         if (window.innerWidth > 600) {
             setDisplaySearchLine(true);
         }
