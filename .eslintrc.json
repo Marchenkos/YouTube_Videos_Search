@@ -58,6 +58,7 @@
         "jsx-a11y/control-has-associated-label": "off",
         "no-alert":"off",
         "object-curly-newline":"off",
-        "no-else-return":"off"
+        "no-else-return":"off",
+        "linebreak-style": "off"
     }
 }

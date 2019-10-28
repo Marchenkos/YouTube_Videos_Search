@@ -4,34 +4,30 @@ import debounce from "lodash.debounce";
 import "../style/search-container.less";
 
 export default function Search({ onClear, handleSubmit }) {
+    const delayBeforeSubmit = 1500;
+    const minDesktopWidth = 600;
+    const pressedKey = "Enter";
     const [isDisplaySearchLine, setDisplaySearchLine] = useState(false);
-
     const inputEl = useRef(null);
 
     useEffect(() => {
-        if (window.innerWidth > 600) {
-            setDisplaySearchLine(true);
-        }
+        setDisplaySearchLine(window.innerWidth > minDesktopWidth);
     });
 
     const submitVideoWithDelay = debounce(e => {
         onClear();
         handleSubmit(e, inputEl.current.value);
-    }, 1500);
+    }, delayBeforeSubmit);
 
     const submitVideo = useCallback(e => {
-        if (e.key === "Enter") {
+        if (e.key === pressedKey) {
             onClear();
             handleSubmit(e, inputEl.current.value);
         }
     }, []);
 
     const showSearchLine = () => {
-        if (isDisplaySearchLine === true) {
-            setDisplaySearchLine(false);
-        } else {
-            setDisplaySearchLine(true);
-        }
+        setDisplaySearchLine(!isDisplaySearchLine);
     };
 
     return (
