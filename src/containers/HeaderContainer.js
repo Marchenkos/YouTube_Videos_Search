@@ -8,7 +8,7 @@ const mapStateToProps = state => {
         videoName: state.video.videoName,
         listOfVideo: state.video.listOfVideo,
         totalResult: state.metadata.totalResult,
-        nextPage: state.metadata.nextPage,
+        nextPageToken: state.metadata.nextPageToken,
         errorMessage: state.error.errorMessage
     };
 };
@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSubmitVideo: name => dispatch(enterVideoName(name)),
-        onGetData: (videoName, nextPage) => dispatch(getVideoAsync(videoName, nextPage)),
+        onGetData: (videoName, nextPageToken) => dispatch(getVideoAsync(videoName, nextPageToken)),
         onClearVideoList: () => dispatch(clearVideoList())
     };
 };

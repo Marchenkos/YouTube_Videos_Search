@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import metadataReducer from "./metadataReducer";
 import videoReducer from "./videoReducer";
-import errorReducer from "./erorReducer";
+import errorReducer from "./errorReducer";
 
 export default combineReducers({
     video: videoReducer,

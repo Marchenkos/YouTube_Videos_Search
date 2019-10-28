@@ -42,11 +42,12 @@
         "no-trailing-spaces":"error",
         "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
         "no-var":"error",
-        "max-len":["error", 200],
+        "max-len":["error", 180],
         "react/jsx-indent":"off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/prefer-stateless-function": "off",
         "comma-dangle": "off",
+        "react/forbid-prop-types": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "react/no-array-index-key": "off",
@@ -56,6 +57,8 @@
         "react/prop-types": "off",
         "jsx-a11y/control-has-associated-label": "off",
         "no-alert":"off",
-        "object-curly-newline":"off"
+        "object-curly-newline":"off",
+        "no-else-return":"off",
+        "linebreak-style": "off"
     }
 }

@@ -1,5 +1,8 @@
 @white: #ffffff;
 @gray: #8d8d8d;
+@desktop: ~"(min-width: 820px)";
+@mobile: ~"(max-width: 600px)";
+
 .without-background {
     background: none;
     border:none;
@@ -19,17 +22,33 @@
         transition: .4s linear;
         .placeholder(@white);
 
-        &:focus {
-            width: 500px;
-            .placeholder(@gray);
+        @media @desktop {
+            &:focus {
+                width: 450px;
+                .placeholder(@gray);
+            }
+        }
+
+        @media @mobile {
+            width: 150px;
+            float: left;
+            margin-left: 30%;
         }
     }
 
     .search-container__search-button {
         vertical-align: bottom;
+        display: none;
         .without-background;
         font-size: 22px;
         cursor: pointer;
+
+        @media @mobile {
+            display: block;
+            font-size: 30px;
+            margin-bottom: 5px;
+            margin-left: 90%;
+        }
     }
 }
 
@@ -40,5 +59,4 @@
     &:-moz-placeholder {
         color: @color;
     }
-   
 }

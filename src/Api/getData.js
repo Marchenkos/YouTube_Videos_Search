@@ -6,14 +6,13 @@ function getChannel(video) {
         id: video.channelId
     })
         .then(response => {
+            const { thumbnails, localized } = response.result.items[0].snippet;
             const channelInformation = {
-                channelIcon: response.result.items[0].snippet.thumbnails.default.url,
-                channelName: response.result.items[0].snippet.localized.title
+                channelIcon: thumbnails.default.url,
+                channelName: localized.title
             };
-            const videoElement = video;
-            videoElement.channelInformation = channelInformation;
 
-            return videoElement;
+            return { ...video, channelInformation };
         });
 }
 
@@ -23,39 +22,41 @@ function getStatistics(video) {
         id: video.id
     })
         .then(response => {
+            const { viewCount, likeCount, commentCount } = response.result.items[0].statistics;
             const videoStatistic = {
-                viewCount: response.result.items[0].statistics.viewCount,
-                likeCount: response.result.items[0].statistics.likeCount,
-                dislikeCount: response.result.items[0].statistics.dislikeCount,
-                commentCount: response.result.items[0].statistics.commentCount
+                viewCount,
+                likeCount,
+                commentCount
             };
-            const videoElement = video;
-            videoElement.videoStatistic = videoStatistic;
 
-            return videoElement;
+            return { ...video, videoStatistic };
         });
 }
 
-function searchVideo(keyword) {
+function searchVideo(keyword, nextPage = "") {
     return gapi.client.youtube.search.list({
         part: "snippet",
         type: "video",
-        q: keyword
+        q: keyword,
+        pageToken: nextPage
     })
         .then(response => {
+            const { pageInfo, nextPageToken } = response.result;
             const videoList = response.result.items.map(item => {
+                const { description, channelId, title, thumbnails, publishedAt } = item.snippet;
+
                 return {
-                    description: item.snippet.description,
-                    channelId: item.snippet.channelId,
+                    description,
+                    channelId,
+                    title,
                     id: item.id.videoId,
-                    title: item.snippet.title,
-                    preview: item.snippet.thumbnails.high.url,
-                    datePublication: item.snippet.publishedAt
+                    preview: thumbnails.high.url,
+                    datePublication: publishedAt
                 };
             });
             const paramOfPage = {
-                totalResult: response.result.pageInfo.totalResults,
-                nextPage: response.result.nextPageToken
+                totalResult: pageInfo.totalResults,
+                nextPageToken
             };
 
             return {
@@ -65,12 +66,12 @@ function searchVideo(keyword) {
         });
 }
 
-export default function loadClient(keyword, nextPage, onSuccess, onError) {
+export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
     gapi.client.setApiKey("AIzaSyDBEXSN7JXj7yqIlwaB1oJOP_WOh9YA5jo");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(() => { console.log("GAPI client loaded for API"); })
         .then(() => {
-            return searchVideo(keyword, nextPage)
+            return searchVideo(keyword, nextPageToken)
                 .then(({ videoList, paramOfPage }) => {
                     videoList.forEach(item => getStatistics(item)
                         .then(videoWithStatistic => getChannel(videoWithStatistic)
@@ -81,8 +82,8 @@ export default function loadClient(keyword, nextPage, onSuccess, onError) {
                 });
         })
         .catch(error => {
-            alert("En error occurred while getting data");
             onError(error);
+            throw new Error(error);
         });
 }
 
