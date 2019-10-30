@@ -26,13 +26,13 @@ export const clearVideoList = () => {
     };
 };
 
-export const getVideoAsync = (videoName, nextPageToken) => {
+export const getVideoAsync = (videoName, nextPageToken, secondSearch = true) => {
     return dispatch => {
         return loadClient(videoName, nextPageToken, (video, paramOfPage) => {
             dispatch(addVideo(video));
             dispatch(getMetadata(paramOfPage));
         }, error => {
             dispatch(addError(error));
-        });
+        }, secondSearch);
     };
 };

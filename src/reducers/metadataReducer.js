@@ -1,7 +1,7 @@
 import { GET_METADATA } from "../actions/getMetadataActions";
 
 const defaultState = {
-    totalResult: 5,
+    totalResult: 0,
     nextPageToken: ""
 };
 

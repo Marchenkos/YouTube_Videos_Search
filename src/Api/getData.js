@@ -1,6 +1,6 @@
 import gapi from "gapi-client";
 
-let loadedVideo = 0;
+const minimumResult = 9;
 
 function getChannel(video) {
     return gapi.client.youtube.channels.list({
@@ -68,7 +68,7 @@ function searchVideo(keyword, nextPage = "") {
         });
 }
 
-export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
+export default function loadClient(keyword, nextPageToken, onSuccess, onError, continueSearch) {
     gapi.client.setApiKey("AIzaSyCXGYmLhp9KcEwosb1XMfQcIXO0EHd_1q0");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(() => { console.log("GAPI client loaded for API"); })
@@ -78,14 +78,13 @@ export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
                     videoList.forEach(item => getStatistics(item)
                         .then(videoWithStatistic => getChannel(videoWithStatistic)
                             .then(videoWithChannel => {
-                                loadedVideo += 1;
                                 onSuccess(videoWithChannel, paramOfPage);
                             })));
                     return paramOfPage;
                 })
                 .then(response => {
-                    if (loadedVideo < response.totalResult) {
-                        loadClient(keyword, response.nextPageToken, onSuccess, onError);
+                    if (response.totalResult > 9 && continueSearch) {
+                        loadClient(keyword, response.nextPageToken, onSuccess, onError, false);
                     }
                 });
         })

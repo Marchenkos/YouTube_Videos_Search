@@ -5,7 +5,9 @@ import ErrorBoundary from "./ErrorBoundary";
 import "../style/video-list.less";
 import "../style/infinite-scroll-message.less";
 
-export default function Content({ listOfVideo }) {
+export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
+    const initialVideoCount = 6;
+    const additionalVideo = 3;
     const [listItems, setListItems] = useState([]);
     const [isLoad, setIsLoad] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
@@ -13,22 +15,30 @@ export default function Content({ listOfVideo }) {
     const handleScroll = () => {
         if (window.innerHeight + window.pageYOffset !== document.documentElement.offsetHeight) return;
         setIsFetching(true);
+
+        if (totalResult > listItems.length) {
+            onLoadMore(videoName, nextPageToken);
+        }
     };
 
     useEffect(() => {
-        if (listOfVideo.length > 8 && isLoad === false) {
+        if (listOfVideo.length > initialVideoCount && !isLoad) {
             setIsLoad(true);
         }
     }, [listOfVideo]);
 
     useEffect(() => {
-        setListItems(listOfVideo.slice(0, 9));
+        if (listOfVideo.length >= initialVideoCount) {
+            setListItems(listOfVideo.slice(0, initialVideoCount));
+        }
     }, [isLoad]);
 
     const fetchMoreListItems = () => {
         setTimeout(() => {
-            setListItems(prevState => ([...prevState, ...listOfVideo.slice(listItems.length, listItems.length + 9)]));
-            setIsFetching(false);
+            if (listOfVideo.length >= listItems.length + additionalVideo) {
+                setListItems(prevState => ([...prevState, ...listOfVideo.slice(listItems.length, listItems.length + additionalVideo)]));
+                setIsFetching(false);
+            }
         }, 2000);
     };
 
