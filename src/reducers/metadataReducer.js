@@ -1,7 +1,7 @@
 import { GET_METADATA } from "../actions/getMetadataActions";
 
 const defaultState = {
-    totalResult: 0,
+    totalResult: 5,
     nextPageToken: ""
 };
 
@@ -10,8 +10,8 @@ export default function metadataReducer(state = defaultState, action) {
     case GET_METADATA:
         return {
             ...state,
-            totalResult: action.nextPageToken,
-            nextPageToken: action.totalResult
+            nextPageToken: action.nextPageToken,
+            totalResult: action.totalResult
         };
     default:
         return state;
