@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLoadMore: (videoName, nextPageToken) => dispatch(getVideoAsync(videoName, nextPageToken, false))
+        onLoadMore: (videoName, nextPageToken) => dispatch(getVideoAsync(videoName, nextPageToken))
     };
 };
 

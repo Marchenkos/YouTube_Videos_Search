@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { enterVideoName, clearVideoList, getVideoAsync } from "../actions/getVideoElementActions";
+import { enterVideoName, clearVideoList, initialGetVideo } from "../actions/getVideoElementActions";
 
 import Header from "../components/Header";
 
@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSubmitVideo: name => dispatch(enterVideoName(name)),
-        onGetData: (videoName, nextPageToken) => dispatch(getVideoAsync(videoName, nextPageToken)),
+        onGetData: (videoName, nextPageToken) => dispatch(initialGetVideo(videoName, nextPageToken)),
         onClearVideoList: () => dispatch(clearVideoList())
     };
 };

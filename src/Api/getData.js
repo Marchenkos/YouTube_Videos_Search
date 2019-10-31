@@ -1,7 +1,5 @@
 import gapi from "gapi-client";
 
-const minimumResult = 9;
-
 function getChannel(video) {
     return gapi.client.youtube.channels.list({
         part: "snippet",
@@ -68,8 +66,8 @@ function searchVideo(keyword, nextPage = "") {
         });
 }
 
-export default function loadClient(keyword, nextPageToken, onSuccess, onError, continueSearch) {
-    gapi.client.setApiKey("AIzaSyDCNpJ-YWHg1kHElIHdlmnVm8NXcBk4gl0");
+export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
+    gapi.client.setApiKey("AIzaSyDubE0IDSRQvaJlnDVOvkzH8WDXH_MtZ5E");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(() => { console.log("GAPI client loaded for API"); })
         .then(() => {
@@ -81,11 +79,6 @@ export default function loadClient(keyword, nextPageToken, onSuccess, onError, c
                                 onSuccess(videoWithChannel, paramOfPage);
                             })));
                     return paramOfPage;
-                })
-                .then(response => {
-                    if (response.totalResult > minimumResult && continueSearch) {
-                        loadClient(keyword, response.nextPageToken, onSuccess, onError, false);
-                    }
                 });
         })
         .catch(error => {
@@ -95,5 +88,5 @@ export default function loadClient(keyword, nextPageToken, onSuccess, onError, c
 }
 
 gapi.load("client", () => {
-    gapi.client.init({ apiKey: "AIzaSyDCNpJ-YWHg1kHElIHdlmnVm8NXcBk4gl0" });
+    gapi.client.init({ apiKey: "AIzaSyDubE0IDSRQvaJlnDVOvkzH8WDXH_MtZ5E" });
 });
