@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { getVideoAsync } from "../actions/getVideoElementActions";
 import Content from "../components/Content";
 
 const mapStateToProps = state => {

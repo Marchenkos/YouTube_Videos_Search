@@ -13,12 +13,11 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     const [isFetching, setIsFetching] = useState(false);
 
     const handleScroll = () => {
-        if (window.innerHeight + window.pageYOffset !== document.documentElement.offsetHeight) return;
-        setIsFetching(true);
-
-        if (totalResult > listItems.length) {
-            onLoadMore(videoName, nextPageToken);
+        if (window.innerHeight + window.pageYOffset !== document.documentElement.offsetHeight) {
+            return;
         }
+
+        setIsFetching(true);
     };
 
     useEffect(() => {
@@ -26,6 +25,11 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
             setIsLoad(true);
         }
     }, [listOfVideo]);
+
+    useEffect(() => {
+        setIsLoad(false);
+        setIsFetching(false);
+    }, [videoName]);
 
     useEffect(() => {
         if (listOfVideo.length >= initialVideoCount) {
@@ -44,11 +48,15 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
+
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     useEffect(() => {
-        if (!isFetching) return;
+        if (totalResult > listItems.length && isFetching) {
+            onLoadMore(videoName, nextPageToken);
+        } else return;
+
         fetchMoreListItems();
     }, [isFetching]);
 
