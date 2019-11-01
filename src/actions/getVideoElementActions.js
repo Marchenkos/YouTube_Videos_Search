@@ -2,8 +2,6 @@ import { getMetadata } from "./getMetadataActions";
 import { addError } from "./addErrorActions";
 import loadClient from "../Api/getData";
 
-const minimumResult = 9;
-
 export const ADD_VIDEO = "ADD_VIDEO";
 export const ENTER_VIDEO_NAME = "ENTER_VIDEO_NAME";
 export const CLEAR_VIDEO_LIST = "CLEAR_VIDEO_LIST";
@@ -28,6 +26,7 @@ export const clearVideoList = () => {
     };
 };
 
+
 export const getVideoAsync = (videoName, nextPageToken) => {
     return dispatch => {
         return loadClient(videoName, nextPageToken, (video, paramOfPage) => {
@@ -40,6 +39,8 @@ export const getVideoAsync = (videoName, nextPageToken) => {
 };
 
 export const initialGetVideo = (videoName, nextPageToken) => {
+    const minimumResult = 9;
+
     return dispatch => {
         return loadClient(videoName, nextPageToken, (video, paramOfPage) => {
             if (minimumResult > paramOfPage.totalResult) return;

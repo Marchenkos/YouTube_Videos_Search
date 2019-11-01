@@ -8,6 +8,7 @@ import "../style/infinite-scroll-message.less";
 export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
     const initialVideoCount = 6;
     const additionalVideo = 3;
+    const delayBeforeShowVideo = 2000;
     const [listItems, setListItems] = useState([]);
     const [isLoad, setIsLoad] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
@@ -18,6 +19,15 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
         }
 
         setIsFetching(true);
+    };
+
+    const fetchMoreListItems = () => {
+        setTimeout(() => {
+            if (listOfVideo.length >= listItems.length + additionalVideo) {
+                setListItems(prevState => ([...prevState, ...listOfVideo.slice(listItems.length, listItems.length + additionalVideo)]));
+                setIsFetching(false);
+            }
+        }, delayBeforeShowVideo);
     };
 
     useEffect(() => {
@@ -37,15 +47,6 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
         }
     }, [isLoad]);
 
-    const fetchMoreListItems = () => {
-        setTimeout(() => {
-            if (listOfVideo.length >= listItems.length + additionalVideo) {
-                setListItems(prevState => ([...prevState, ...listOfVideo.slice(listItems.length, listItems.length + additionalVideo)]));
-                setIsFetching(false);
-            }
-        }, 2000);
-    };
-
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
 
@@ -55,9 +56,8 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     useEffect(() => {
         if (totalResult > listItems.length && isFetching) {
             onLoadMore(videoName, nextPageToken);
-        } else return;
-
-        fetchMoreListItems();
+            fetchMoreListItems();
+        }
     }, [isFetching]);
 
     return (
