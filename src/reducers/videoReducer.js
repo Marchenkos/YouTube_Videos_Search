@@ -1,6 +1,6 @@
 import { ADD_VIDEO, ENTER_VIDEO_NAME, CLEAR_VIDEO_LIST } from "../actions/getVideoElementActions";
 
-const defaultState = {
+export const defaultState = {
     videoName: "",
     listOfVideo: []
 };
@@ -15,7 +15,7 @@ export default function videoReducer(state = defaultState, action) {
     case ADD_VIDEO:
         return {
             ...state,
-            listOfVideo: [...state.listOfVideo, action.videoList]
+            listOfVideo: [...state.listOfVideo, action.video]
         };
     case CLEAR_VIDEO_LIST:
         return {

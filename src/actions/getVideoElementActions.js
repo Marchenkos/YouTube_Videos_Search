@@ -9,7 +9,7 @@ export const CLEAR_VIDEO_LIST = "CLEAR_VIDEO_LIST";
 export const addVideo = item => {
     return {
         type: ADD_VIDEO,
-        videoList: item
+        video: item
     };
 };
 
