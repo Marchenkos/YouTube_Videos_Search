@@ -10,8 +10,8 @@ export default function metadataReducer(state = defaultState, action) {
     case GET_METADATA:
         return {
             ...state,
-            totalResult: action.nextPageToken,
-            nextPageToken: action.totalResult
+            nextPageToken: action.nextPageToken,
+            totalResult: action.totalResult
         };
     default:
         return state;
