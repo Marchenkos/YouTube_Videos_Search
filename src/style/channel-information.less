@@ -1,3 +1,5 @@
+@mobile: ~"(max-width: 600px)";
+
 .channel-information{
     display: flex;
     float: left;
@@ -18,5 +20,9 @@
             color: #808080;
             margin-left: 4px;
         }
+    }
+
+    @media @mobile {
+        display: none;
     }
 }

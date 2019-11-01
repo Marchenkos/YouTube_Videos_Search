@@ -22,6 +22,7 @@ export default function Video({ value: { preview, title, description, datePublic
                     <ChannelInformation value={channelInformation} date={newDateFormat(datePublication)} />
                     <VideoRating value={videoStatistic} />
                 </div>
+                <div className="video-description__information-button" />
             </div>
         </div>
     );

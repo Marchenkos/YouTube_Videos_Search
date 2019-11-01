@@ -1,3 +1,9 @@
+@mobile: ~"(max-width: 600px)";
+
 .additional-information {
     margin:25px 0 5px;
+
+    @media @mobile {
+        display: none;
+    }
 }

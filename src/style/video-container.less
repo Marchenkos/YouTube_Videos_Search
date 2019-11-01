@@ -8,17 +8,50 @@
         padding: 25px;
         box-sizing: content-box;
 
+        @media @mobile {
+            padding: 15px;
+            display: flex;
+            justify-content: flex-start;
+        }
+
         .video-description__title{
             font-size: 20px;
             max-width: 420px;
             margin-bottom: 20px;
+
+            @media @mobile {
+                margin-bottom: 0;
+            }
         }
 
         .video-description__description{
             color:#4e4e4e;
             max-width: 450px;
             font-size: 17px;
+
+            @media @mobile {
+                display: none;
+            }
         }
+
+        .video-description__information-button {
+            display: none;
+
+            @media @mobile {
+                flex-grow: 1;
+                display: block;
+                width: 40px;
+                height: 40px;
+                background-image: url(../img/menu.png);
+                background-repeat: no-repeat;
+                background-size: 100%;
+            }
+
+            :active .video-description__description {
+                display: block;
+            }
+        }
+
     }
 
     .video-container__preview {

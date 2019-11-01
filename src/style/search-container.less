@@ -8,9 +8,11 @@
     border:none;
     color: @white;
 }
+
 .search-container{ 
     flex-grow: 1;
     text-align: end;
+
     .search-container__searching-line{
         width: 250px;
         position: relative;
@@ -32,7 +34,9 @@
         @media @mobile {
             width: 150px;
             float: left;
-            margin-left: 30%;
+            margin-left: 0;
+            margin-bottom: 3px;
+            font-size: 15px;
         }
     }
 
@@ -47,8 +51,14 @@
             display: block;
             font-size: 30px;
             margin-bottom: 5px;
-            margin-left: 90%;
+            margin-left: 0;
         }
+    }
+
+    @media @mobile {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
     }
 }
 
