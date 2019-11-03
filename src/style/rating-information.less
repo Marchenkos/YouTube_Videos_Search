@@ -1,6 +1,7 @@
 @mobile: ~"(max-width: 600px)";
 
 .rating-information{
+    flex-grow: 1;
     display: flex;
     justify-content: flex-end;
 
@@ -16,9 +17,11 @@
         .item__count{
             margin-top: 5px;
         }
+
     }
 
     @media @mobile {
-        display: none;
+        max-width:310px;
+        margin-left: 56px;
     }
 }

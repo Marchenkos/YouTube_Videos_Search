@@ -2,7 +2,6 @@
 
 .channel-information{
     display: flex;
-    float: left;
 
     .channel-information__icon{
         width: 50px;
@@ -13,6 +12,11 @@
     .channel-information__description-box {
         .description__channel-name{
             margin: 4px;
+            max-width: 140px;
+
+            @media @mobile {
+                font-size: 15px;
+            }
         }
         
         .description__date-publication{
@@ -20,9 +24,5 @@
             color: #808080;
             margin-left: 4px;
         }
-    }
-
-    @media @mobile {
-        display: none;
     }
 }
