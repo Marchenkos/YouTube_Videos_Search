@@ -15,7 +15,7 @@ export default function videoReducer(state = defaultState, action) {
     case ADD_VIDEO:
         return {
             ...state,
-            listOfVideo: [...state.listOfVideo, ...action.videoList]
+            listOfVideo: [...state.listOfVideo, ...action.listOfVideo]
         };
     case CLEAR_VIDEO_LIST:
         return {
