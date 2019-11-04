@@ -45,9 +45,8 @@ export const initialGetVideo = (videoName, nextPageToken) => {
         return loadClient(videoName, nextPageToken, (video, paramOfPage) => {
             if (minimumResult > paramOfPage.totalResult) return;
 
-            dispatch(addVideo(video));
             loadClient(videoName, paramOfPage.nextPageToken, (additionalVideo, parametersOfPage) => {
-                dispatch(addVideo(additionalVideo));
+                dispatch(addVideo(additionalVideo.concat(video)));
                 dispatch(getMetadata(parametersOfPage));
             });
         }, error => {

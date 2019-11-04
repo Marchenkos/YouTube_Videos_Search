@@ -3,5 +3,8 @@ module.exports = {
     setupFilesAfterEnv: ["jest-enzyme"],
     testEnvironment: "enzyme",
     snapshotSerializers: ["enzyme-to-json/serializer"],
-    setupFiles: ["./src/setupTests.js"]
+    setupFiles: ["./src/setupTests.js"],
+    moduleNameMapper: {
+        "^.+\\.(css|less)$": "identity-obj-proxy"
+    }
 };

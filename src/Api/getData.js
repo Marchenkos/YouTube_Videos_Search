@@ -73,11 +73,15 @@ export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
         .then(() => {
             searchVideo(keyword, nextPageToken)
                 .then(({ videoList, paramOfPage }) => {
-                    videoList.forEach(item => getStatistics(item)
-                        .then(videoWithStatistic => getChannel(videoWithStatistic)
-                            .then(videoWithChannel => {
-                                onSuccess(videoWithChannel, paramOfPage);
-                            })));
+                    const videoStatistic = videoList.map(item => getStatistics(item));
+
+                    Promise.all(videoStatistic).then(values => {
+                        const videoWithChannel = values.map(item => getChannel(item));
+
+                        Promise.all(videoWithChannel).then(finishedValues => {
+                            onSuccess(finishedValues, paramOfPage);
+                        });
+                    });
                     return paramOfPage;
                 });
         })
