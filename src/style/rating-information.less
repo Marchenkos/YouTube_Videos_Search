@@ -12,16 +12,22 @@
         .item__icon{
             color:rgb(61, 61, 61);
             font-size: 25px;
+
+            @media @mobile {
+                font-size: 21px;
+            }
         }
-    
+
         .item__count{
             margin-top: 5px;
+
+            @media @mobile {
+                font-size: 13px;
+            }
         }
 
-    }
-
-    @media @mobile {
-        max-width:310px;
-        margin-left: 56px;
+        @media @mobile {
+            margin-left: 11px;
+        }
     }
 }

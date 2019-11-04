@@ -67,7 +67,7 @@ function searchVideo(keyword, nextPage = "") {
 }
 
 export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
-    gapi.client.setApiKey("AIzaSyDDMVMKTmxpMGj9fli6GK2rTEnLqUNWZng");
+    gapi.client.setApiKey("AIzaSyA9MPN_HJzdeH7MzqAP8-9LE35Ch3HHBs0");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(() => { console.log("GAPI client loaded for API"); })
         .then(() => {
@@ -88,5 +88,5 @@ export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
 }
 
 gapi.load("client", () => {
-    gapi.client.init({ apiKey: "AIzaSyDDMVMKTmxpMGj9fli6GK2rTEnLqUNWZng" });
+    gapi.client.init({ apiKey: "AIzaSyA9MPN_HJzdeH7MzqAP8-9LE35Ch3HHBs0" });
 });

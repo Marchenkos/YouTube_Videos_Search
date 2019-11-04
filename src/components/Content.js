@@ -54,7 +54,6 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     }, []);
 
     useEffect(() => {
-        console.log(totalResult);
         if (totalResult > listItems.length && isFetching) {
             onLoadMore(videoName, nextPageToken);
             fetchMoreListItems();
