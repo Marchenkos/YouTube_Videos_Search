@@ -23,8 +23,8 @@ describe("Reducer for loading video", () => {
             videoName: "start",
             listOfVideo: [1, 2, 3, 4]
         };
-        const additionalVideo = 5;
-        const expectedVideoList = [1, 2, 3, 4, 5];
+        const additionalVideo = [5, 6, 7];
+        const expectedVideoList = [1, 2, 3, 4, 5, 6, 7];
         const action = {
             type: ADD_VIDEO,
             video: additionalVideo

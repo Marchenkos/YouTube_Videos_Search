@@ -1,8 +1,14 @@
+import thunk from "redux-thunk";
+import configureMockStore from "redux-mock-store";
+import fetchMock from "fetch-mock";
 import * as actions from "../actions/getVideoElementActions";
 import getMetadata, { GET_METADATA } from "../actions/getMetadataActions";
 import addError, { ADD_ERROR } from "../actions/addErrorActions";
 
+
 const { describe, it, expect } = global;
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 
 describe("Test action construtors", () => {
@@ -60,5 +66,44 @@ describe("Test action construtors", () => {
         };
 
         expect(addError(errorMessage)).toEqual(expectedAction);
+    });
+});
+
+
+describe("NewsActions", () => {
+    describe("async actions", () => {
+        afterEach(() => {
+            fetchMock.reset();
+            fetchMock.restore();
+        });
+
+        it("creates NEWS_GET_SUCCESS when fetching news has been done", () => {
+            fetchMock.getOnce("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest", {
+                headers: { "content-type": "application/json" }, // описываем заголовки ответа
+                body: { finishedValues: [1, 2, 3], paramOfPage: {} }, // описываем сам ответ, опять без необходимости вставлять реальные данные
+            });
+
+            const expectedActions = [
+                {
+                    type: actions.ADD_VIDEO,
+                    payload: [1, 2, 3]
+                },
+                {
+                    type: GET_METADATA,
+                    payload: {},
+                },
+            ];
+
+            const store = mockStore({});
+
+            return store.dispatch(actions.getVideoAsync("name", "", (video, paramOfPage) => {
+                actions.addVideo(video);
+                getMetadata(paramOfPage);
+            }, error => {
+                addError(error);
+            })).then(() => {
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+        });
     });
 });
