@@ -6,14 +6,15 @@
     font-family: Calibri;
     font-size: 30px;
 
-    @media @mobile {
-        font-size: 20px;
-    }
-
     .logo__picture {
         width: 75px;
         margin-right: 12px;
+
+        @media @mobile {
+            width: 50px;
+        }
     }
+
     .logo__caption{
         line-height: 0.7;
         margin-bottom: 4px;
@@ -25,10 +26,6 @@
         .item__mini-title{
             margin-bottom: 5px;
             font-size: 20px;
-
-            @media @mobile {
-                display: none;
-            }
         }
     }
 }
