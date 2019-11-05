@@ -27,7 +27,7 @@ describe("Reducer for loading video", () => {
         const expectedVideoList = [1, 2, 3, 4, 5, 6, 7];
         const action = {
             type: ADD_VIDEO,
-            video: additionalVideo
+            listOfVideo: additionalVideo
         };
 
         expect(videoReducer(initialState, action)).toEqual({

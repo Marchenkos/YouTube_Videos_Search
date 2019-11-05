@@ -4,8 +4,8 @@ import { ADD_ERROR } from "../actions/addErrorActions";
 const { describe, it, expect } = global;
 
 
-describe("Reducer for loading informaition about next page and total result", () => {
-    it("Get a metadata", () => {
+describe("Reducer for loading error message", () => {
+    it("Get a error action", () => {
         const errorMessage = "404 Not Found";
         const action = {
             type: ADD_ERROR,

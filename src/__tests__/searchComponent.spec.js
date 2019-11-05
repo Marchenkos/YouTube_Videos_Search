@@ -29,7 +29,6 @@ describe("Componet that allow to search video", () => {
                 wrapper.find(".search-container__search-button").props().onClick();
             });
             expect(setState).toBeTruthy();
-            console.log(wrapper.debug());
             expect(wrapper.contains(<button />)).toEqual(false);
             // expect(wrapper.contains(<input />)).toEqual(true);
         });

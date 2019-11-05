@@ -5,7 +5,7 @@ import VideoRating from "../components/VideoRating";
 const { describe, it, expect } = global;
 
 describe("Component with information about video rating", () => {
-    it("Render component with error message", () => {
+    it("Render three field for statistic information", () => {
         const props = {
             value: {
                 viewCount: 100,
@@ -14,8 +14,6 @@ describe("Component with information about video rating", () => {
             }
         };
         const wrapper = shallow(<VideoRating {...props} />);
-        expect(wrapper.contains(
-            <span className="icon-heart item__icon" />
-        )).toEqual(true);
+        expect(wrapper.children().length).toEqual(3);
     });
 });

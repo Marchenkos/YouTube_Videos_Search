@@ -43,7 +43,7 @@
         "no-trailing-spaces":"error",
         "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
         "no-var":"error",
-        "max-len":"off",
+        "max-len": ["error", 200],
         "no-nested-ternary": "off",
         "react/jsx-indent":"off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
