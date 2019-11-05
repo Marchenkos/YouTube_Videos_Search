@@ -9,7 +9,7 @@ export const CLEAR_VIDEO_LIST = "CLEAR_VIDEO_LIST";
 export const addVideo = item => {
     return {
         type: ADD_VIDEO,
-        videoList: item
+        listOfVideo: item
     };
 };
 
@@ -42,12 +42,11 @@ export const initialGetVideo = (videoName, nextPageToken) => {
     const minimumResult = 9;
 
     return dispatch => {
-        return loadClient(videoName, nextPageToken, (video, paramOfPage) => {
+        return loadClient(videoName, nextPageToken, (videoList, paramOfPage) => {
             if (minimumResult > paramOfPage.totalResult) return;
 
-            dispatch(addVideo(video));
-            loadClient(videoName, paramOfPage.nextPageToken, (additionalVideo, parametersOfPage) => {
-                dispatch(addVideo(additionalVideo));
+            loadClient(videoName, paramOfPage.nextPageToken, (additionalVideoList, parametersOfPage) => {
+                dispatch(addVideo(additionalVideoList.concat(videoList)));
                 dispatch(getMetadata(parametersOfPage));
             });
         }, error => {
