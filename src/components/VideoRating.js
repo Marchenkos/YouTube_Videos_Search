@@ -8,6 +8,8 @@ export default function VideoRating({ value: { viewCount, commentCount, likeCoun
             return `${(number / 1000000).toFixed(1)}M`;
         } else if (number > 1000) {
             return `${Math.floor(number / 1000)}K`;
+        } else if (!number) {
+            return 0;
         }
 
         return number;

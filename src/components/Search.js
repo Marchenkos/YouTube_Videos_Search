@@ -7,12 +7,23 @@ export default function Search({ onClear, handleSubmit }) {
     const delayBeforeSubmit = 1500;
     const minDesktopWidth = 600;
     const pressedKey = "Enter";
-    const [isDisplaySearchLine, setDisplaySearchLine] = useState(false);
+    const [isDisplaySearchLine, setDisplaySearchLine] = useState(true);
     const inputEl = useRef(null);
 
-    useEffect(() => {
+    const showSearchLine = () => {
+        setDisplaySearchLine(!isDisplaySearchLine);
+    };
+
+    const showSearchElements = () => {
         setDisplaySearchLine(window.innerWidth > minDesktopWidth);
-    });
+    };
+
+
+    useEffect(() => {
+        window.addEventListener("resize", showSearchElements);
+
+        return () => window.removeEventListener("resize", showSearchElements);
+    }, []);
 
     const submitVideoWithDelay = debounce(e => {
         onClear();
@@ -26,18 +37,16 @@ export default function Search({ onClear, handleSubmit }) {
         }
     }, []);
 
-    const showSearchLine = () => {
-        setDisplaySearchLine(!isDisplaySearchLine);
-    };
-
     return (
         <div className="search-container">
             {isDisplaySearchLine ? (
-                <input className="search-container__searching-line" type="text" ref={inputEl} onKeyPress={submitVideo} onChange={submitVideoWithDelay} placeholder="Search..." />
+                <>
+                    <input className="search-container__searching-line" type="text" ref={inputEl} onKeyPress={submitVideo} onChange={submitVideoWithDelay} placeholder="Search..." />
+                    <button type="submit" className="icon-search search-container__search-button" onClick={showSearchLine} />
+                </>
             ) : (
-                null
+                <button type="submit" className="icon-search search-container__search-button" onClick={showSearchLine} />
             )}
-            <button type="submit" className="icon-search search-container__search-button" onClick={showSearchLine} />
         </div>
     );
 }
