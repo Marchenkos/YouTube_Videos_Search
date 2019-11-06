@@ -1,4 +1,6 @@
 import React from "react";
+import errorPng from "../img/error.png";
+import "../style/error-block.less";
 
 export default class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -16,7 +18,7 @@ export default class ErrorBoundary extends React.Component {
 
     render() {
         if (this.state.hasError) {
-            return <div className="error-block">Something went wrong.</div>;
+            return <img className="error-block" src={errorPng} alt="error" />;
         }
 
         return this.props.children;

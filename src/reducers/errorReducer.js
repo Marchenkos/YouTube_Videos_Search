@@ -1,6 +1,6 @@
 import { ADD_ERROR } from "../actions/addErrorActions";
 
-const defaultState = {
+export const defaultState = {
     errorMessage: ""
 };
 

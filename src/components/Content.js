@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import debounce from "lodash.debounce";
 import Video from "./Video";
 import ErrorBoundary from "./ErrorBoundary";
 import "../style/video-list.less";
+import "../style/nothing-found-block.less";
 import "../style/infinite-scroll-message.less";
+import nothingFound from "../img/nothingFound.png";
+import getSpinner from "../additionalFunctions/getSpinner";
 
 export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
     const initialVideoCount = 6;
@@ -21,14 +25,22 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
         setIsFetching(true);
     };
 
-    const fetchMoreListItems = () => {
-        setTimeout(() => {
-            if (listOfVideo.length >= listItems.length + additionalVideo) {
-                setListItems(prevState => ([...prevState, ...listOfVideo.slice(listItems.length, listItems.length + additionalVideo)]));
-                setIsFetching(false);
-            }
-        }, delayBeforeShowVideo);
+    const initialRender = (name) => {
+        if (name) {
+            return <img className="nothing-found-block" src={nothingFound} alt="error" />;
+        } else {
+            return null;
+        }
     };
+
+    const fetchMoreListItems = debounce(() => {
+        if (listOfVideo.length >= listItems.length + additionalVideo) {
+            setListItems(prevState => (
+                [...prevState, ...listOfVideo.slice(listItems.length, listItems.length + additionalVideo)]
+            ));
+            setIsFetching(false);
+        }
+    }, delayBeforeShowVideo);
 
     useEffect(() => {
         if (listOfVideo.length > initialVideoCount && !isLoad) {
@@ -44,6 +56,8 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     useEffect(() => {
         if (listOfVideo.length >= initialVideoCount) {
             setListItems(listOfVideo.slice(0, initialVideoCount));
+        } else if (!listOfVideo.length) {
+            setListItems([]);
         }
     }, [isLoad]);
 
@@ -62,13 +76,13 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
 
     return (
         <ErrorBoundary>
-            <main>
+            <main id="main-container">
                 <ul className="video-list">
-                    {listItems && listItems.map(
-                        (video, index) => <Video className="video-list__video" key={index} value={video} />
-                    )}
+                    {(listItems && listItems.length)
+                        ? listItems.map((video, index) => <Video className="video-list__video" key={index} value={video} />)
+                        : initialRender(videoName)}
                 </ul>
-                {(isFetching && listItems.length !== listOfVideo.length) && <div className="infinite-scroll-message">Fetching more video...</div>}
+                {(isFetching && listItems.length !== listOfVideo.length) ? getSpinner() : null}
             </main>
         </ErrorBoundary>
     );

@@ -1,6 +1,6 @@
 import { GET_METADATA } from "../actions/getMetadataActions";
 
-const defaultState = {
+export const defaultState = {
     totalResult: 0,
     nextPageToken: ""
 };

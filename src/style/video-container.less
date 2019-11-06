@@ -5,7 +5,7 @@
     background: #ffffff;
     flex-basis: 30%;
     position: relative;
-    margin:40px 10px 0;
+    margin-bottom: 40px;
 
     @media @desctop {
         flex-basis: 45%;
@@ -13,16 +13,20 @@
 
     @media @mobile {
         flex-basis: 80%;
-        box-sizing: border-box;
     }
 
     .video-container__description-container{
         padding: 25px;
         box-sizing: content-box;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
 
         @media @mobile {
             padding: 15px;
             display: flex;
+            flex-direction: row;
+            height: 50px;
             justify-content: flex-end;
             align-items: flex-start;
         }
@@ -34,6 +38,8 @@
 
             @media @mobile {
                 margin-bottom: 0;
+                height: inherit;
+                overflow: scroll;
                 flex-grow: 1;
             }
         }
@@ -46,7 +52,6 @@
             width: 100%;
             left: 0;
             height: 79%;
-           
 
             @media @mobile {
                 position: absolute;
