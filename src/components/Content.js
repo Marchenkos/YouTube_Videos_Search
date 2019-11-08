@@ -9,11 +9,12 @@ import "../style/infinite-scroll-message.less";
 import nothingFound from "../img/nothingFound.png";
 import getSpinner from "../additionalFunctions/getSpinner";
 
-export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
+export default function Content({ videoName, totalResult, listOfVideo }) {
     const initialVideoCount = 6;
     const additionalVideo = 3;
     const delayBeforeShowVideo = 2000;
     const [listItems, setListItems] = useState([]);
+    const [show, setShow] = useState(false);
     const [isLoad, setIsLoad] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
 
@@ -45,6 +46,8 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     useEffect(() => {
         if (listOfVideo.length > initialVideoCount && !isLoad) {
             setIsLoad(true);
+        } else if (isLoad) {
+            setShow(true);
         }
     }, [listOfVideo]);
 
@@ -54,7 +57,7 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     }, [videoName]);
 
     useEffect(() => {
-        if (listOfVideo.length >= initialVideoCount) {
+        if (isLoad && listOfVideo.length >= initialVideoCount) {
             setListItems(listOfVideo.slice(0, initialVideoCount));
         } else if (!listOfVideo.length) {
             setListItems([]);
@@ -68,8 +71,13 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     }, []);
 
     useEffect(() => {
+        setTimeout(() => {
+            setShow(true);
+        }, 6000);
+    }, []);
+
+    useEffect(() => {
         if (totalResult > listItems.length && isFetching) {
-            onLoadMore(videoName, nextPageToken);
             fetchMoreListItems();
         }
     }, [isFetching]);
@@ -78,9 +86,9 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
         <ErrorBoundary>
             <main id="main-container">
                 <ul className="video-list">
-                    {(listItems && listItems.length)
+                    {show && ((listItems && listItems.length > 0)
                         ? listItems.map((video, index) => <Video className="video-list__video" key={index} value={video} />)
-                        : initialRender(videoName)}
+                        : initialRender(videoName))}
                 </ul>
                 {(isFetching && listItems.length !== listOfVideo.length) ? getSpinner() : null}
             </main>
