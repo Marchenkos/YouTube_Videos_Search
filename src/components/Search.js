@@ -1,15 +1,15 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import debounce from "lodash.debounce";
 import "../style/search-container.less";
-import getSpinner from "../additionalFunctions/getSpinner";
 import mobileVersion from "../additionalFunctions/mobileVersion";
 
 
 export default function Search({ onClear, handleSubmit }) {
     const minDesktopWidth = 600;
+    const delayBeforeSubmit = 1500;
     const pressedKey = "Enter";
     const [isDisplaySearchLine, setDisplaySearchLine] = useState(true);
-    const [isLoad, setIsLoad] = useState(false);
 
     const inputEl = useRef(null);
 
@@ -21,20 +21,20 @@ export default function Search({ onClear, handleSubmit }) {
         setDisplaySearchLine(window.innerWidth > minDesktopWidth);
     };
 
-    useEffect(() => {
-        mobileVersion(showSearchElements);
-    }, []);
-
-    const submitVideoWithDelay = () => {
-        setIsLoad(true);
-    };
+    const submitVideoWithDelay = debounce(e => {
+        onClear();
+        handleSubmit(e, inputEl.current.value);
+    }, delayBeforeSubmit);
 
     const submitVideo = useCallback(e => {
         if (e.key === pressedKey) {
             onClear();
             handleSubmit(e, inputEl.current.value);
-            setIsLoad(false);
         }
+    }, []);
+
+    useEffect(() => {
+        mobileVersion(showSearchElements);
     }, []);
 
     return (
@@ -54,9 +54,6 @@ export default function Search({ onClear, handleSubmit }) {
             ) : (
                 <button type="submit" className="icon-search search-container__search-button" onClick={showSearchLine} />
             )}
-
-            {isLoad ? getSpinner() : null}
-
         </div>
     );
 }

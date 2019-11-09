@@ -18,7 +18,6 @@
     .video-container__description-container{
         padding: 25px;
         box-sizing: content-box;
-        height: 200px;
         display: flex;
         flex-direction: column;
 
@@ -32,6 +31,8 @@
         }
 
         .video-description__title{
+            overflow: hidden;
+            height: 40px;
             font-size: 20px;
             max-width: 420px;
             margin-bottom: 20px;
@@ -47,11 +48,12 @@
         .video-description__description{
             color:#4e4e4e;
             background: none;
+            overflow: hidden;
             top: 0;
             word-wrap: break-word;
             width: 100%;
             left: 0;
-            height: 79%;
+            height: 50px;
 
             @media @mobile {
                 position: absolute;
