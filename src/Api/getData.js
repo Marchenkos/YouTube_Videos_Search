@@ -67,21 +67,28 @@ function searchVideo(keyword, nextPage = "") {
 }
 
 export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
-    gapi.client.setApiKey("AIzaSyB-FmaL5H0aAwCFlbtOa-Vep6YBhFQDx2g");
+    gapi.client.setApiKey("AIzaSyCAexurYw3emCOwQbyayxElAYy9TgBW0Wo");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-        .then(() => { console.log("GAPI client loaded for API"); })
+        .then(() => {
+            console.log("GAPI client loaded for API");
+        })
         .then(() => {
             searchVideo(keyword, nextPageToken)
                 .then(({ videoList, paramOfPage }) => {
-                    const videoStatistic = videoList.map(item => getStatistics(item));
+                    if (!videoList.length) {
+                        onSuccess([null], paramOfPage);
+                    }
+                    const videoStatistic = videoList.map(getStatistics);
 
-                    Promise.all(videoStatistic).then(values => {
-                        const videoWithChannel = values.map(item => getChannel(item));
-
-                        Promise.all(videoWithChannel).then(finishedValues => {
-                            onSuccess(finishedValues, paramOfPage);
+                    Promise.all(videoStatistic)
+                        .then(values => {
+                            const videoWithChannel = values.map(getChannel);
+                            Promise.all(videoWithChannel)
+                                .then(finishedValues => {
+                                    onSuccess(finishedValues, paramOfPage);
+                                });
                         });
-                    });
+
                     return paramOfPage;
                 });
         })
@@ -92,5 +99,5 @@ export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
 }
 
 gapi.load("client", () => {
-    gapi.client.init({ apiKey: "AIzaSyB-FmaL5H0aAwCFlbtOa-Vep6YBhFQDx2g" });
+    gapi.client.init({ apiKey: "AIzaSyCAexurYw3emCOwQbyayxElAYy9TgBW0Wo" });
 });

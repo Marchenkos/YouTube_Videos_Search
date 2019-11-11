@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
+import debounce from "lodash.debounce";
 import Video from "./Video";
+import Spinner from "./Spinner";
 import ErrorBoundary from "./ErrorBoundary";
+import nothingFound from "../img/nothingFound.png";
 import "../style/video-list.less";
+import "../style/nothing-found-block.less";
 import "../style/infinite-scroll-message.less";
 
 export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
     const initialVideoCount = 6;
     const additionalVideo = 3;
-    const delayBeforeShowVideo = 2000;
+    const delayBeforeShowVideo = 4000;
     const [listItems, setListItems] = useState([]);
     const [isLoad, setIsLoad] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
@@ -21,14 +25,19 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
         setIsFetching(true);
     };
 
-    const fetchMoreListItems = () => {
-        setTimeout(() => {
-            if (listOfVideo.length >= listItems.length + additionalVideo) {
-                setListItems(prevState => ([...prevState, ...listOfVideo.slice(listItems.length, listItems.length + additionalVideo)]));
-                setIsFetching(false);
-            }
-        }, delayBeforeShowVideo);
-    };
+    const initialRender = useCallback(name => {
+        return (name && listOfVideo[0] === null ? <img className="nothing-found-block" src={nothingFound} alt="error" />
+            : null);
+    }, [listOfVideo]);
+
+    const fetchMoreListItems = debounce(() => {
+        if (listOfVideo.length >= listItems.length + additionalVideo) {
+            setListItems(prevState => (
+                [...prevState, ...listOfVideo.slice(listItems.length, listItems.length + additionalVideo)]
+            ));
+            setIsFetching(false);
+        }
+    }, delayBeforeShowVideo);
 
     useEffect(() => {
         if (listOfVideo.length > initialVideoCount && !isLoad) {
@@ -42,8 +51,10 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     }, [videoName]);
 
     useEffect(() => {
-        if (listOfVideo.length >= initialVideoCount) {
+        if (isLoad && listOfVideo.length >= initialVideoCount) {
             setListItems(listOfVideo.slice(0, initialVideoCount));
+        } else if (!listOfVideo.length) {
+            setListItems([]);
         }
     }, [isLoad]);
 
@@ -62,13 +73,14 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
 
     return (
         <ErrorBoundary>
-            <main>
+            <main id="main-container">
                 <ul className="video-list">
-                    {listItems && listItems.map(
-                        (video, index) => <Video className="video-list__video" key={index} value={video} />
-                    )}
+                    {(listItems && listItems.length)
+                        ? listItems.map((video, index) => <Video className="video-list__video" key={index} value={video} />)
+                        : initialRender(videoName)}
                 </ul>
-                {(isFetching && listItems.length !== listOfVideo.length) && <div className="infinite-scroll-message">Fetching more video...</div>}
+                {(isFetching && listItems.length !== listOfVideo.length) ? <Spinner /> : null}
+                {(videoName && listOfVideo.length === 0) ? <Spinner /> : null}
             </main>
         </ErrorBoundary>
     );

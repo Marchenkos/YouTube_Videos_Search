@@ -1,6 +1,6 @@
 import { ADD_VIDEO, ENTER_VIDEO_NAME, CLEAR_VIDEO_LIST } from "../actions/getVideoElementActions";
 
-const defaultState = {
+export const defaultState = {
     videoName: "",
     listOfVideo: []
 };
