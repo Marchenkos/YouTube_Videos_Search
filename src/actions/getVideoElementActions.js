@@ -43,7 +43,11 @@ export const initialGetVideo = (videoName, nextPageToken) => {
 
     return dispatch => {
         return loadClient(videoName, nextPageToken, (videoList, paramOfPage) => {
-            if (minimumResult > paramOfPage.totalResult) return;
+            if (minimumResult > paramOfPage.totalResult) {
+                dispatch(addVideo(videoList));
+
+                return;
+            }
 
             loadClient(videoName, paramOfPage.nextPageToken, (additionalVideoList, parametersOfPage) => {
                 dispatch(addVideo(additionalVideoList.concat(videoList)));

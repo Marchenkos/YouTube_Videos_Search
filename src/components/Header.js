@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Search from "./Search";
+import logoPng from "../img/icon_youTube.png";
 import "../style/header-container.less";
 import "../style/logo.less";
-import logoPng from "../img/icon_youTube.png";
 
 export default function Header({ nextPageToken, onGetData, onSubmitVideo, onClearVideoList }) {
     const onSubmitVideoName = (e, videoName) => {

@@ -1,14 +1,16 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
+import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 import "../style/search-container.less";
 
 export default function Search({ onClear, handleSubmit }) {
-    const delayBeforeSubmit = 1500;
     const minDesktopWidth = 600;
+    const delayBeforeSubmit = 1500;
     const pressedKey = "Enter";
     const [isDisplaySearchLine, setDisplaySearchLine] = useState(true);
-    const inputEl = useRef(null);
+
+    const inputElement = useRef(null);
 
     const showSearchLine = () => {
         setDisplaySearchLine(!isDisplaySearchLine);
@@ -18,30 +20,34 @@ export default function Search({ onClear, handleSubmit }) {
         setDisplaySearchLine(window.innerWidth > minDesktopWidth);
     };
 
-
-    useEffect(() => {
-        window.addEventListener("resize", showSearchElements);
-
-        return () => window.removeEventListener("resize", showSearchElements);
-    }, []);
-
-    const submitVideoWithDelay = debounce(e => {
+    const submitRequestWithDelay = debounce(e => {
         onClear();
-        handleSubmit(e, inputEl.current.value);
+        handleSubmit(e, inputElement.current.value);
     }, delayBeforeSubmit);
 
-    const submitVideo = useCallback(e => {
+    const submitRequest = useCallback(e => {
         if (e.key === pressedKey) {
             onClear();
-            handleSubmit(e, inputEl.current.value);
+            handleSubmit(e, inputElement.current.value);
         }
+    }, []);
+
+    useEffect(() => {
+        mobileVersionHelper(showSearchElements);
     }, []);
 
     return (
         <div className="search-container">
             {isDisplaySearchLine ? (
                 <>
-                    <input className="search-container__searching-line" type="text" ref={inputEl} onKeyPress={submitVideo} onChange={submitVideoWithDelay} placeholder="Search..." />
+                    <input
+                        className="search-container__searching-line"
+                        type="text"
+                        ref={inputElement}
+                        onKeyPress={submitRequest}
+                        onChange={submitRequestWithDelay}
+                        placeholder="Search..."
+                    />
                     <button type="submit" className="icon-search search-container__search-button" onClick={showSearchLine} />
                 </>
             ) : (
