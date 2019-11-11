@@ -19,19 +19,19 @@ export default function VideoRating({ value: { viewCount, commentCount, likeCoun
         <div className="rating-information">
             <div className="rating-information__block">
                 <span className="icon-heart item__icon" />
-                <p className="item__count">
+                <p className="item__count item__count--likes">
                     {numberConvertToString(likeCount)}
                 </p>
             </div>
             <div className="rating-information__block">
                 <span className="icon-eye item__icon" />
-                <p className="item__count">
+                <p className="item__count item__count--views">
                     {numberConvertToString(viewCount)}
                 </p>
             </div>
             <div className="rating-information__block">
                 <span className="icon-bubbles2 item__icon" />
-                <p className="item__count">
+                <p className="item__count item__count--comments">
                     {numberConvertToString(commentCount)}
                 </p>
             </div>
