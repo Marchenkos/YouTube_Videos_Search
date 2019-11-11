@@ -18,7 +18,7 @@ export default class ErrorBoundary extends React.Component {
     }
 
     render() {
-        return (this.state.hasError ? <img className="error-block" src={errorPng} alt="error" /> : this.props.children);
+        return this.state.hasError ? <img className="error-block" src={errorPng} alt="error" /> : this.props.children;
     }
 }
 
