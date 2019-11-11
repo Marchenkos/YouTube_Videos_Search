@@ -27,7 +27,7 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
 
     const initialRender = useCallback(name => {
         if (name && listOfVideo[0] === "null") {
-            return <img className="nothing-found-block" src={nothingFound} alt="error" />;
+            return <img className="nothing-found-block" src={nothingFound} alt="nothing-found" />;
         } else {
             return null;
         }
