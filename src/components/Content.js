@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash.debounce";
 import Video from "./Video";
+import Spinner from "./Spinner";
 import ErrorBoundary from "./ErrorBoundary";
+import nothingFound from "../img/nothingFound.png";
 import "../style/video-list.less";
 import "../style/nothing-found-block.less";
 import "../style/infinite-scroll-message.less";
-import nothingFound from "../img/nothingFound.png";
-import getSpinner from "../additionalFunctions/getSpinner";
 
 export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
     const initialVideoCount = 6;
@@ -26,11 +26,8 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     };
 
     const initialRender = useCallback(name => {
-        if (name && listOfVideo[0] === "null") {
-            return <img className="nothing-found-block" src={nothingFound} alt="error" />;
-        } else {
-            return null;
-        }
+        return ((name && listOfVideo[0] === null) ? <img className="nothing-found-block" src={nothingFound} alt="error" />
+            : null);
     }, [listOfVideo]);
 
     const fetchMoreListItems = debounce(() => {
@@ -51,6 +48,7 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     useEffect(() => {
         setIsLoad(false);
         setIsFetching(false);
+
     }, [videoName]);
 
     useEffect(() => {
@@ -82,8 +80,8 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
                         ? listItems.map((video, index) => <Video className="video-list__video" key={index} value={video} />)
                         : initialRender(videoName)}
                 </ul>
-                {(isFetching && listItems.length !== listOfVideo.length) ? getSpinner() : null}
-                {(videoName && listOfVideo.length === 0) ? getSpinner() : null}
+                {(isFetching && listItems.length !== listOfVideo.length) ? <Spinner /> : null}
+                {(videoName && listOfVideo.length === 0) ? <Spinner /> : null}
             </main>
         </ErrorBoundary>
     );

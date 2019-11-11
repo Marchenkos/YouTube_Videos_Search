@@ -2,16 +2,16 @@ import React, { useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ChannelInformation from "./ChannelInformation";
 import VideoRating from "./VideoRating";
+import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 import "../style/video-container.less";
 import "../style/additional-information.less";
-import mobileVersion from "../additionalFunctions/mobileVersion";
 
 export default function Video({
     value: { preview, title, description, datePublication, channelInformation, videoStatistic, id } }) {
+
     const [showDescription, setShowDescription] = useState(false);
     const [isMobileVersion, setMobileVersion] = useState(false);
     const minDesktopWidth = 600;
-
     const changeDisplayOfElements = () => {
         setMobileVersion(window.innerWidth <= minDesktopWidth);
     };
@@ -22,7 +22,15 @@ export default function Video({
         return `${newDate.getDate()}.${newDate.getMonth() + 1}.${newDate.getFullYear()}`;
     };
 
-    const renderForDesctop = () => {
+    const viewVideo = () => {
+        window.location = `https://www.youtube.com/watch?v=${id}`;
+    };
+
+    const showVideoDescription = useCallback(() => {
+        setShowDescription(!showDescription);
+    }, [showDescription]);
+
+    const renderForDesktop = () => {
         return (
             <>
                 <h1 className="video-description__title">{title}</h1>
@@ -37,14 +45,6 @@ export default function Video({
             </>
         );
     };
-
-    const viewVideo = () => {
-        window.location = `https://www.youtube.com/watch?v=${id}`;
-    };
-
-    const showVideoDescription = useCallback(() => {
-        setShowDescription(!showDescription);
-    }, [showDescription]);
 
     const renderForMobile = showDescriptionForMobile => {
         if (showDescriptionForMobile) {
@@ -80,7 +80,7 @@ export default function Video({
     };
 
     useEffect(() => {
-        mobileVersion(changeDisplayOfElements);
+        mobileVersionHelper(changeDisplayOfElements);
     }, []);
 
     useEffect(() => {
@@ -93,7 +93,7 @@ export default function Video({
         <div className="video-container">
             <img src={preview} alt="videoPreview" className="video-container__preview" onClick={viewVideo} />
             <div className="video-container__description-container">
-                { isMobileVersion ? renderForMobile(showDescription) : renderForDesctop(showDescription) }
+                { isMobileVersion ? renderForMobile(showDescription) : renderForDesktop(showDescription) }
             </div>
         </div>
     );
