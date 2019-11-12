@@ -5,7 +5,7 @@ import loadClient from "../Api/getData";
 export const ADD_VIDEO = "ADD_VIDEO";
 export const ENTER_VIDEO_NAME = "ENTER_VIDEO_NAME";
 export const CLEAR_VIDEO_LIST = "CLEAR_VIDEO_LIST";
-export const LOADING = "LOADING";
+export const SHOW_SPINNER = "SHOW_SPINNER";
 
 export const addVideo = item => {
     return {
@@ -27,9 +27,10 @@ export const clearVideoList = () => {
     };
 };
 
-export const loadVideo = () => {
+export const showSpinner = value => {
     return {
-        type: LOADING
+        type: SHOW_SPINNER,
+        isLoading: value
     };
 };
 

@@ -27,11 +27,8 @@ export default function Content({
         setIsFetching(true);
     };
 
-    const initialRender = useCallback((name, isLoading) => {
-        console.log(name, isLoading);
+    const initialRender = useCallback((name) => {
         if (name && listOfVideo[0] === null) {
-            onShowSpinner();
-
             return <img className="nothing-found-block" src={nothingFound} alt="nothing-found" />;
         } else return null;
     }, [listOfVideo]);
@@ -48,9 +45,9 @@ export default function Content({
     useEffect(() => {
         if (listOfVideo.length > initialVideoCount && !isLoad) {
             setIsLoad(true);
-        } else if (listOfVideo[0] === null) {
-            onShowSpinner();
-        }
+        } else if (!listOfVideo.length && videoName) {
+            onShowSpinner(true);
+        } else onShowSpinner(false);
     }, [listOfVideo]);
 
     useEffect(() => {
@@ -85,10 +82,10 @@ export default function Content({
                 <ul className="video-list">
                     {(listItems && listItems.length)
                         ? listItems.map((video, index) => <Video className="video-list__video" key={index} value={video} />)
-                        : initialRender(videoName, isLoadingVideoList)}
+                        : initialRender(videoName)}
                 </ul>
                 {(isFetching && listItems.length !== listOfVideo.length) ? <Spinner /> : null}
-                {(videoName && listOfVideo.length === 0) ? <Spinner /> : null}
+                {isLoadingVideoList ? <Spinner /> : null}
             </main>
         </ErrorBoundary>
     );

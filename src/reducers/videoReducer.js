@@ -1,4 +1,4 @@
-import { ADD_VIDEO, ENTER_VIDEO_NAME, CLEAR_VIDEO_LIST, LOADING } from "../actions/getVideoElementActions";
+import { ADD_VIDEO, ENTER_VIDEO_NAME, CLEAR_VIDEO_LIST, SHOW_SPINNER } from "../actions/getVideoElementActions";
 
 export const defaultState = {
     videoName: "",
@@ -23,10 +23,10 @@ export default function videoReducer(state = defaultState, action) {
             ...state,
             listOfVideo: []
         };
-    case LOADING:
+    case SHOW_SPINNER:
         return {
             ...state,
-            isLoadingVideoList: !state.isLoadingVideoList
+            isLoadingVideoList: action.isLoading
         };
     default:
         return state;

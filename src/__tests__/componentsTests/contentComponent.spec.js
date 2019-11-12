@@ -11,6 +11,7 @@ describe("Component containing video components", () => {
             listOfVideo: [null],
             videoName: "name"
         };
+
         const wrapper = shallow(<Content {...props} />);
         const list = wrapper.find("ul");
 
@@ -18,17 +19,25 @@ describe("Component containing video components", () => {
         expect(list.children().length).toEqual(1);
     });
 
-    it("Return spinner, when the list of video is loading", () => {
+    it("Return spinner, when the video list is loading", () => {
         const props = {
             listOfVideo: [],
-            isLoadingVideoList: true,
-            videoName: "name",
-            onShowSpinner: () => {}
+            isLoadingVideoList: true
         };
-        const wrapper = shallow(<Content {...props} />);
-        const mainContainer = wrapper.find("main");
 
-        expect(mainContainer.children().length).toEqual(2);
-        expect(mainContainer.find(Spinner).length).toEqual(1);
+        const wrapper = shallow(<Content {...props} />);
+
+        expect(wrapper.find(Spinner).length).toEqual(1);
+    });
+
+    it("Don't show spinner, when the video list was loaded", () => {
+        const props = {
+            listOfVideo: [],
+            isLoadingVideoList: false
+        };
+
+        const wrapper = shallow(<Content {...props} />);
+
+        expect(wrapper.find(Spinner).length).toEqual(0);
     });
 });
