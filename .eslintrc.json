@@ -45,7 +45,7 @@
         "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
         "no-var":"error",
         "consistent-return": "off",
-        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
         "object-property-newline": "error",
         "max-len":["error", 130],
         "no-nested-ternary": "off",

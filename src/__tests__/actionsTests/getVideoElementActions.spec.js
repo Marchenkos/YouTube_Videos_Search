@@ -1,6 +1,6 @@
-import * as actions from "../actions/getVideoElementActions";
-import { getMetadata, GET_METADATA } from "../actions/getMetadataActions";
-import { addError, ADD_ERROR } from "../actions/addErrorActions";
+import * as actions from "../../actions/getVideoElementActions";
+import { getMetadata, GET_METADATA } from "../../actions/getMetadataActions";
+import { addError, ADD_ERROR } from "../../actions/addErrorActions";
 
 const { describe, it, expect } = global;
 

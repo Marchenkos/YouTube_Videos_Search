@@ -4,9 +4,13 @@ import "../style/rating-information.less";
 
 export default function VideoRating({ value: { viewCount, commentCount, likeCount } }) {
     const numberConvertToString = number => {
-        if (number > 1000000) {
-            return `${(number / 1000000).toFixed(1)}M`;
-        } else if (number > 1000) {
+        if (number >= 1000000) {
+            if (number % 1000000) {
+                return `${(number / 1000000).toFixed(1)}M`;
+            }
+
+            return `${Math.floor(number / 1000000)}M`;
+        } else if (number >= 1000) {
             return `${Math.floor(number / 1000)}K`;
         } else if (!number) {
             return 0;

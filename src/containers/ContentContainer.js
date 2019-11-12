@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getVideoAsync } from "../actions/getVideoElementActions";
+import { getVideoAsync, loadVideo } from "../actions/getVideoElementActions";
 import Content from "../components/Content";
 
 const mapStateToProps = state => {
@@ -7,13 +7,15 @@ const mapStateToProps = state => {
         videoName: state.video.videoName,
         listOfVideo: state.video.listOfVideo,
         totalResult: state.metadata.totalResult,
-        nextPageToken: state.metadata.nextPageToken
+        nextPageToken: state.metadata.nextPageToken,
+        isLoadingVideoList: state.video.isLoading
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLoadMore: (videoName, nextPageToken) => dispatch(getVideoAsync(videoName, nextPageToken))
+        onLoadMore: (videoName, nextPageToken) => dispatch(getVideoAsync(videoName, nextPageToken)),
+        onShowSpinner: () => dispatch(loadVideo())
     };
 };
 

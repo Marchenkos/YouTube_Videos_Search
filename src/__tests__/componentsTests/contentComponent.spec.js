@@ -1,15 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Content from "../components/Content";
-import Spinner from "../components/Spinner";
+import Content from "../../components/Content";
+import Spinner from "../../components/Spinner";
 
 const { describe, it, expect } = global;
 
 describe("Component containing video components", () => {
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     it("Return img, when nothing found", () => {
         const props = {
             listOfVideo: [null],
@@ -25,7 +21,9 @@ describe("Component containing video components", () => {
     it("Return spinner, when the list of video is loading", () => {
         const props = {
             listOfVideo: [],
-            videoName: "name"
+            isLoadingVideoList: true,
+            videoName: "name",
+            onShowSpinner: () => {}
         };
         const wrapper = shallow(<Content {...props} />);
         const mainContainer = wrapper.find("main");

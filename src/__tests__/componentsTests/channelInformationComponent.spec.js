@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import ChannelInformation from "../components/ChannelInformation";
+import ChannelInformation from "../../components/ChannelInformation";
 
 const { describe, it, expect } = global;
 
@@ -20,9 +20,7 @@ describe("Component with main information about channel", () => {
     });
 
     it("Render two elements with text from props", () => {
-        expect(wrapper.find("div").find("h2")
-            .text()).toEqual(props.value.channelName);
-        expect(wrapper.find("div").find(".description__date-publication")
-            .text()).toEqual(props.date);
+        expect(wrapper.find("div").find("h2").text()).toEqual(props.value.channelName);
+        expect(wrapper.find("div").find(".description__date-publication").text()).toEqual(props.date);
     });
 });

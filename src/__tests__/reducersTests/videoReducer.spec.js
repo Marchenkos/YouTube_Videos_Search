@@ -1,8 +1,7 @@
-import videoReducer, { defaultState } from "../reducers/videoReducer";
-import { ADD_VIDEO, ENTER_VIDEO_NAME, CLEAR_VIDEO_LIST } from "../actions/getVideoElementActions";
+import videoReducer, { defaultState } from "../../reducers/videoReducer";
+import { ADD_VIDEO, ENTER_VIDEO_NAME, CLEAR_VIDEO_LIST } from "../../actions/getVideoElementActions";
 
 const { describe, it, expect } = global;
-
 
 describe("Reducer for loading video", () => {
     it("Get a videoname to search", () => {

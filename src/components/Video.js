@@ -1,8 +1,7 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import ChannelInformation from "./ChannelInformation";
 import VideoRating from "./VideoRating";
-import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 import "../style/video-container.less";
 import "../style/additional-information.less";
 
@@ -10,11 +9,7 @@ export default function Video({
     value: { preview, title, description, datePublication, channelInformation, videoStatistic, id } }) {
 
     const [showDescription, setShowDescription] = useState(false);
-    const [isMobileVersion, setMobileVersion] = useState(false);
     const minDesktopWidth = 600;
-    const changeDisplayOfElements = () => {
-        setMobileVersion(window.innerWidth <= minDesktopWidth);
-    };
 
     const newDateFormat = date => {
         const newDate = new Date(date);
@@ -79,21 +74,11 @@ export default function Video({
         }
     };
 
-    useEffect(() => {
-        mobileVersionHelper(changeDisplayOfElements);
-    }, []);
-
-    useEffect(() => {
-        if (window.innerWidth <= minDesktopWidth) {
-            setMobileVersion(true);
-        }
-    }, []);
-
     return (
         <div className="video-container">
             <img src={preview} alt="videoPreview" className="video-container__preview" onClick={viewVideo} />
             <div className="video-container__description-container">
-                { isMobileVersion ? renderForMobile(showDescription) : renderForDesktop(showDescription) }
+                { window.innerWidth <= minDesktopWidth ? renderForMobile(showDescription) : renderForDesktop(showDescription) }
             </div>
         </div>
     );

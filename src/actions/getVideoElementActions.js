@@ -5,6 +5,7 @@ import loadClient from "../Api/getData";
 export const ADD_VIDEO = "ADD_VIDEO";
 export const ENTER_VIDEO_NAME = "ENTER_VIDEO_NAME";
 export const CLEAR_VIDEO_LIST = "CLEAR_VIDEO_LIST";
+export const LOADING = "LOADING";
 
 export const addVideo = item => {
     return {
@@ -26,6 +27,11 @@ export const clearVideoList = () => {
     };
 };
 
+export const loadVideo = () => {
+    return {
+        type: LOADING
+    };
+};
 
 export const getVideoAsync = (videoName, nextPageToken) => {
     return dispatch => {

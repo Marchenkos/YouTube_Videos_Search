@@ -9,7 +9,9 @@ import "../style/video-list.less";
 import "../style/nothing-found-block.less";
 import "../style/infinite-scroll-message.less";
 
-export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
+export default function Content({
+    nextPageToken, videoName, totalResult, listOfVideo, isLoadingVideoList, onLoadMore, onShowSpinner }) {
+
     const initialVideoCount = 6;
     const additionalVideo = 3;
     const delayBeforeShowVideo = 4000;
@@ -25,9 +27,13 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
         setIsFetching(true);
     };
 
-    const initialRender = useCallback(name => {
-        return (name && listOfVideo[0] === null ? <img className="nothing-found-block" src={nothingFound} alt="nothing-found" />
-            : null);
+    const initialRender = useCallback((name, isLoading) => {
+        console.log(name, isLoading);
+        if (name && listOfVideo[0] === null) {
+            onShowSpinner();
+
+            return <img className="nothing-found-block" src={nothingFound} alt="nothing-found" />;
+        } else return null;
     }, [listOfVideo]);
 
     const fetchMoreListItems = debounce(() => {
@@ -42,6 +48,8 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
     useEffect(() => {
         if (listOfVideo.length > initialVideoCount && !isLoad) {
             setIsLoad(true);
+        } else if (listOfVideo[0] === null) {
+            onShowSpinner();
         }
     }, [listOfVideo]);
 
@@ -77,7 +85,7 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
                 <ul className="video-list">
                     {(listItems && listItems.length)
                         ? listItems.map((video, index) => <Video className="video-list__video" key={index} value={video} />)
-                        : initialRender(videoName)}
+                        : initialRender(videoName, isLoadingVideoList)}
                 </ul>
                 {(isFetching && listItems.length !== listOfVideo.length) ? <Spinner /> : null}
                 {(videoName && listOfVideo.length === 0) ? <Spinner /> : null}

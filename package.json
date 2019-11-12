@@ -21,6 +21,7 @@
     },
     "homepage": "https://github.com/Marchenkos/YouTube_Videos_Search#readme",
     "dependencies": {
+        "@testing-library/react-hooks": "^3.2.1",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.2",
