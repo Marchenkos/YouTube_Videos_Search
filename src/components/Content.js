@@ -45,9 +45,9 @@ export default function Content({
     useEffect(() => {
         if (listOfVideo.length > initialVideoCount && !isLoad) {
             setIsLoad(true);
-        } else if (!listOfVideo.length && videoName) {
-            onShowSpinner(true);
-        } else onShowSpinner(false);
+        }
+
+        onShowSpinner(!listOfVideo.length && videoName);
     }, [listOfVideo]);
 
     useEffect(() => {

@@ -1,31 +1,46 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import ChannelInformation from "./ChannelInformation";
 import VideoRating from "./VideoRating";
+import mobileVersionHelper from "../additionalFunctions/mobileVersionHelper";
 import "../style/video-container.less";
 import "../style/additional-information.less";
 
-export default function Video({
-    value: { preview, title, description, datePublication, channelInformation, videoStatistic, id } }) {
+export default class Video extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showDescription: false,
+            minDesktopWidth: 600,
+            isMobileVersion: window.innerWidth <= 600,
+        };
+    }
 
-    const [showDescription, setShowDescription] = useState(false);
-    const minDesktopWidth = 600;
+    componentWillMount() {
+        mobileVersionHelper(this.changeDisplayOfElements);
+    }
 
-    const newDateFormat = date => {
+    changeDisplayOfElements = () => {
+        this.setState(prevState => ({ isMobileVersion: window.innerWidth <= prevState.minDesktopWidth }));
+    };
+
+    newDateFormat = date => {
         const newDate = new Date(date);
 
         return `${newDate.getDate()}.${newDate.getMonth() + 1}.${newDate.getFullYear()}`;
     };
 
-    const viewVideo = () => {
-        window.location = `https://www.youtube.com/watch?v=${id}`;
+    viewVideo = () => {
+        window.location = `https://www.youtube.com/watch?v=${this.props.id}`;
     };
 
-    const showVideoDescription = useCallback(() => {
-        setShowDescription(!showDescription);
-    }, [showDescription]);
+    showVideoDescription = () => {
+        this.setState(prevState => ({ showDescription: !prevState.showDescription }));
+    };
 
-    const renderForDesktop = () => {
+    renderForDesktop = () => {
+        const { title, description, datePublication, channelInformation, videoStatistic } = this.props.value;
+
         return (
             <>
                 <h1 className="video-description__title">{title}</h1>
@@ -33,7 +48,7 @@ export default function Video({
                 <div className="additional-information">
                     <ChannelInformation
                         value={channelInformation}
-                        date={newDateFormat(datePublication)}
+                        date={this.newDateFormat(datePublication)}
                     />
                     <VideoRating value={videoStatistic} />
                 </div>
@@ -41,7 +56,9 @@ export default function Video({
         );
     };
 
-    const renderForMobile = showDescriptionForMobile => {
+    renderForMobile = showDescriptionForMobile => {
+        const { title, description, datePublication, channelInformation, videoStatistic } = this.props.value;
+
         if (showDescriptionForMobile) {
             return (
                 <>
@@ -49,14 +66,14 @@ export default function Video({
                     <div className="additional-information">
                         <ChannelInformation
                             value={channelInformation}
-                            date={newDateFormat(datePublication)}
+                            date={this.newDateFormat(datePublication)}
                         />
                         <VideoRating value={videoStatistic} />
                     </div>
                     <button
                         type="button"
                         className="icon-cross video-description__close-information-button"
-                        onClick={showVideoDescription}
+                        onClick={this.showVideoDescription}
                     />
                 </>
             );
@@ -67,21 +84,27 @@ export default function Video({
                     <button
                         type="button"
                         className="icon-flickr video-description__open-information-button"
-                        onClick={showVideoDescription}
+                        onClick={this.showVideoDescription}
                     />
                 </>
             );
         }
     };
 
-    return (
-        <div className="video-container">
-            <img src={preview} alt="videoPreview" className="video-container__preview" onClick={viewVideo} />
-            <div className="video-container__description-container">
-                { window.innerWidth <= minDesktopWidth ? renderForMobile(showDescription) : renderForDesktop(showDescription) }
+    render() {
+        const { preview } = this.props.value;
+        const currentState = this.state;
+
+        return (
+            <div className="video-container">
+                <img src={preview} alt="videoPreview" className="video-container__preview" onClick={this.viewVideo} />
+                <div className="video-container__description-container">
+                    { currentState.isMobileVersion ? this.renderForMobile(this.state.showDescription)
+                        : this.renderForDesktop() }
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 Video.propTypes = {

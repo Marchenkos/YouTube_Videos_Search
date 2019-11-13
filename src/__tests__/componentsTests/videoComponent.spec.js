@@ -70,6 +70,18 @@ describe("Component with main information about video", () => {
         expect(container.find("button").length).toBe(1);
     });
 
+    it("Render elements for mobile version if state has property 'isMobileVersion': true", () => {
+        const wrapper2 = shallow(<Video {...props} />);
+        const container = wrapper2.find("div");
+
+        wrapper2.setState({ isMobileVersion: true });
+
+        expect(wrapper2.state("isMobileVersion")).toBeTruthy();
+        expect(container.find("h1").text()).toBe(title);
+        expect(container.find("img").prop("src")).toBe(preview);
+        expect(container.find("button").length).toBe(1);
+    });
+
     it("Show description, statistic and channel informations in mobile version, after click", () => {
         resizeWindow(500);
 

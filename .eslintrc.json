@@ -35,6 +35,7 @@
     "rules": {
         "react-redux/connect-prefer-named-arguments": 2,
         "no-console":"off",
+        "react/no-deprecated": "off",
         "semi-spacing": ["error", {"before": false, "after": true}],
         "quotes": ["error", "double"],
         "indent":["error", 4],

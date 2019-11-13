@@ -49,7 +49,7 @@ describe("Component with information about video rating", () => {
         expect(elementsWithCount.views.text()).toBe(props.value.viewCount);
     });
 
-    it("Rebder three elements with passed data, where 1000 = 'K'", () => {
+    it("Render three elements with passed data, where 1000 = 'K'", () => {
         const props = {
             value: {
                 likeCount: "20000",
@@ -72,7 +72,7 @@ describe("Component with information about video rating", () => {
         expect(elementsWithCount.views.text()).toBe(expectedOutput.viewCount);
     });
 
-    it("Rebder three elements with passed data, where 1 000 000 = 'M'", () => {
+    it("Render three elements with passed data, where 1 000 000 = 'M'", () => {
         const props = {
             value: {
                 likeCount: "2500000",
@@ -95,7 +95,7 @@ describe("Component with information about video rating", () => {
         expect(elementsWithCount.views.text()).toBe(expectedOutput.viewCount);
     });
 
-    it("Rebder three elements with passed data, if data didn't pass return 0", () => {
+    it("Render three elements with passed data, if data didn't pass return 0", () => {
         const props = {
             value: {
                 likeCount: "20000",

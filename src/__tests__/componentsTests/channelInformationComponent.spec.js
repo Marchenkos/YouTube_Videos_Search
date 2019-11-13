@@ -14,7 +14,6 @@ describe("Component with main information about channel", () => {
     };
     const wrapper = shallow(<ChannelInformation {...props} />);
 
-
     it("Render a channel icon", () => {
         expect(wrapper.find("img").prop("src")).toEqual(props.value.channelIcon);
     });
