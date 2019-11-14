@@ -1,17 +1,17 @@
-import { LOADING_STARTED, LOADING_FINISHED } from "../actions/loadingVideoActions";
+import { START_LOADING, FINISH_LOADING } from "../actions/loadingVideoActions";
 
 export const defaultState = {
     isLoadingVideoList: false
 };
 
-export default function showSpinnerReducer(state = defaultState, action) {
+export default function loadingStateReducer(state = defaultState, action) {
     switch (action.type) {
-    case LOADING_STARTED:
+    case START_LOADING:
         return {
             ...state,
             isLoadingVideoList: action.isLoading
         };
-    case LOADING_FINISHED:
+    case FINISH_LOADING:
         return {
             ...state,
             isLoadingVideoList: action.isLoading

@@ -1,16 +1,16 @@
-export const LOADING_STARTED = " LOADING_STARTED";
-export const LOADING_FINISHED = " LOADING_FINISHED";
+export const START_LOADING = " START_LOADING";
+export const FINISH_LOADING = " FINISH_LOADING";
 
-export const showSpinner = () => {
+export const startLoading = () => {
     return {
-        type: LOADING_STARTED,
+        type: START_LOADING,
         isLoading: true
     };
 };
 
-export const hideSpinner = () => {
+export const finishLoading = () => {
     return {
-        type: LOADING_FINISHED,
+        type: FINISH_LOADING,
         isLoading: false
     };
 };

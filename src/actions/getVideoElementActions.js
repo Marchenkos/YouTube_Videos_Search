@@ -1,5 +1,5 @@
 import { getMetadata } from "./getMetadataActions";
-import { showSpinner, hideSpinner } from "./loadingVideoActions";
+import { startLoading, finishLoading } from "./loadingVideoActions";
 import { addError } from "./addErrorActions";
 import loadClient from "../Api/getData";
 
@@ -29,12 +29,12 @@ export const clearVideoList = () => {
 
 export const getVideoAsync = (videoName, nextPageToken) => {
     return dispatch => {
-        dispatch(showSpinner());
+        dispatch(startLoading());
 
         return loadClient(videoName, nextPageToken, (video, paramOfPage) => {
             dispatch(addVideo(video));
             dispatch(getMetadata(paramOfPage));
-            dispatch(hideSpinner());
+            dispatch(finishLoading());
         }, error => {
             dispatch(addError(error));
         });
@@ -45,12 +45,12 @@ export const initialGetVideo = (videoName, nextPageToken) => {
     const minimumResult = 9;
 
     return dispatch => {
-        dispatch(showSpinner());
+        dispatch(startLoading());
 
         return loadClient(videoName, nextPageToken, (videoList, paramOfPage) => {
             if (minimumResult > paramOfPage.totalResult) {
                 dispatch(addVideo(videoList));
-                dispatch(hideSpinner());
+                dispatch(finishLoading());
 
                 return;
             }
@@ -58,7 +58,7 @@ export const initialGetVideo = (videoName, nextPageToken) => {
             loadClient(videoName, paramOfPage.nextPageToken, (additionalVideoList, parametersOfPage) => {
                 dispatch(addVideo(additionalVideoList.concat(videoList)));
                 dispatch(getMetadata(parametersOfPage));
-                dispatch(hideSpinner());
+                dispatch(finishLoading());
             });
         }, error => {
             dispatch(addError(error));

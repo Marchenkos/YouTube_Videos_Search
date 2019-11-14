@@ -8,8 +8,9 @@ const { describe, it, expect } = global;
 describe("Component containing video components", () => {
     it("Return img, when nothing found", () => {
         const props = {
-            listOfVideo: [null],
-            videoName: "name"
+            listOfVideo: [],
+            videoName: "name",
+            isLoadingVideoList: false
         };
 
         const wrapper = shallow(<Content {...props} />);

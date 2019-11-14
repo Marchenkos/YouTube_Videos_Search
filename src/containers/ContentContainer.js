@@ -8,7 +8,7 @@ const mapStateToProps = state => {
         listOfVideo: state.video.listOfVideo,
         totalResult: state.metadata.totalResult,
         nextPageToken: state.metadata.nextPageToken,
-        isLoadingVideoList: state.spinner.isLoadingVideoList
+        isLoadingVideoList: state.loadingState.isLoadingVideoList
     };
 };
 
