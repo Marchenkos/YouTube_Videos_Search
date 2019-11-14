@@ -39,8 +39,11 @@
 
             @media @mobile {
                 margin-bottom: 0;
+                width: 100px;
                 height: inherit;
-                overflow: scroll;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 flex-grow: 1;
             }
         }
