@@ -12,7 +12,6 @@ describe("Componet that allow to search video", () => {
 
     it("Show search line on header and don't show button", () => {
         const wrapper = shallow(<Search {...initialProps} />);
-
         const container = wrapper.find("div");
 
         expect(container.children().length).toEqual(2);

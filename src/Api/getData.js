@@ -75,9 +75,6 @@ export default function loadClient(keyword, nextPageToken, onSuccess, onError) {
         .then(() => {
             searchVideo(keyword, nextPageToken)
                 .then(({ videoList, paramOfPage }) => {
-                    if (!videoList.length) {
-                        onSuccess([null], paramOfPage);
-                    }
                     const videoStatistic = videoList.map(getStatistics);
 
                     Promise.all(videoStatistic)

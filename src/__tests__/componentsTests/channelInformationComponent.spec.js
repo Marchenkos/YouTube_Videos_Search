@@ -12,6 +12,7 @@ describe("Component with main information about channel", () => {
         },
         date: "00.00.00"
     };
+
     const wrapper = shallow(<ChannelInformation {...props} />);
 
     it("Render a channel icon", () => {

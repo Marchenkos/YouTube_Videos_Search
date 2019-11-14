@@ -57,7 +57,6 @@ describe("Component with information about video rating", () => {
                 commentCount: "300000",
             }
         };
-
         const expectedOutput = {
             likeCount: "20K",
             viewCount: "1K",
@@ -80,7 +79,6 @@ describe("Component with information about video rating", () => {
                 commentCount: "3000000",
             }
         };
-
         const expectedOutput = {
             likeCount: "2.5M",
             viewCount: "10.8M",
@@ -103,7 +101,6 @@ describe("Component with information about video rating", () => {
                 commentCount: "",
             }
         };
-
         const expectedOutput = {
             likeCount: "20K",
             viewCount: "0",
