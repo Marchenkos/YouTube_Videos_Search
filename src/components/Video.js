@@ -23,7 +23,7 @@ export default function Video({
     };
 
     const viewVideo = () => {
-        window.location = `https://www.youtube.com/watch?v=${id}`;
+        window.open(`https://www.youtube.com/watch?v=${id}`, "_blank");
     };
 
     const showVideoDescription = useCallback(() => {
