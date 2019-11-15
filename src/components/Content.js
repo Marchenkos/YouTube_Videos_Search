@@ -9,10 +9,12 @@ import "../style/video-list.less";
 import "../style/nothing-found-block.less";
 import "../style/infinite-scroll-message.less";
 
-export default function Content({ nextPageToken, videoName, totalResult, listOfVideo, onLoadMore }) {
+export default function Content({
+    nextPageToken, videoName, totalResult, listOfVideo, isLoadingVideoList, onLoadMore }) {
+
     const initialVideoCount = 6;
     const additionalVideo = 3;
-    const delayBeforeShowVideo = 4000;
+    const delayBeforeShowVideo = 1500;
     const [listItems, setListItems] = useState([]);
     const [isLoad, setIsLoad] = useState(false);
     const [isFetching, setIsFetching] = useState(false);
@@ -25,9 +27,10 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
         setIsFetching(true);
     };
 
-    const initialRender = useCallback(name => {
-        return (name && listOfVideo[0] === null ? <img className="nothing-found-block" src={nothingFound} alt="error" />
-            : null);
+    const initialRender = useCallback((name) => {
+        if (name && !listOfVideo.length && !isLoadingVideoList) {
+            return <img className="nothing-found-block" src={nothingFound} alt="nothing-found" />;
+        } else return null;
     }, [listOfVideo]);
 
     const fetchMoreListItems = debounce(() => {
@@ -79,8 +82,8 @@ export default function Content({ nextPageToken, videoName, totalResult, listOfV
                         ? listItems.map((video, index) => <Video className="video-list__video" key={index} value={video} />)
                         : initialRender(videoName)}
                 </ul>
-                {(isFetching && listItems.length !== listOfVideo.length) ? <Spinner /> : null}
-                {(videoName && listOfVideo.length === 0) ? <Spinner /> : null}
+                {(isFetching && isLoadingVideoList) ? <Spinner /> : null}
+                {!listOfVideo.length && isLoadingVideoList ? <Spinner /> : null}
             </main>
         </ErrorBoundary>
     );

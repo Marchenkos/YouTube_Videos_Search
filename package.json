@@ -21,21 +21,23 @@
     },
     "homepage": "https://github.com/Marchenkos/YouTube_Videos_Search#readme",
     "dependencies": {
+        "@testing-library/react-hooks": "^3.2.1",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.2",
         "gapi-client": "0.0.3",
+        "identity-obj-proxy": "^3.0.0",
         "jest": "^24.9.0",
         "jest-enzyme": "^7.1.1",
         "jest-extended": "^0.11.2",
         "lodash.debounce": "^4.0.8",
+        "prop-types": "^15.7.2",
         "react": "^16.10.2",
         "react-dom": "^16.10.2",
         "react-redux": "^7.1.1",
         "redux": "^4.0.4",
         "redux-devtools-extension": "^2.13.8",
-        "redux-thunk": "^2.3.0",
-        "prop-types": "^15.7.2"
+        "redux-thunk": "^2.3.0"
     },
     "devDependencies": {
         "@babel/core": "^7.6.2",
