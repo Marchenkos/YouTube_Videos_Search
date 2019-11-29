@@ -1,0 +1,109 @@
+@mobile: ~ "(max-width: 600px)";
+@desktop: ~ "(min-width: 700px) and (max-width: 1050px)";
+
+.video-container {
+    background: #ffffff;
+    flex-basis: 30%;
+    position: relative;
+    margin-bottom: 40px;
+
+    @media @desktop {
+        flex-basis: 45%;
+    }
+
+    @media @mobile {
+        flex-basis: 80%;
+    }
+
+    .video-container__description-container{
+        padding: 25px;
+        box-sizing: content-box;
+        display: flex;
+        flex-direction: column;
+
+        @media @mobile {
+            padding: 15px;
+            display: flex;
+            flex-direction: row;
+            height: 50px;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+
+        .video-description__title{
+            overflow: hidden;
+            height: 40px;
+            font-size: 20px;
+            max-width: 420px;
+            margin-bottom: 20px;
+
+            @media @mobile {
+                margin-bottom: 0;
+                width: 100px;
+                height: inherit;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                flex-grow: 1;
+            }
+        }
+
+        .video-description__description{
+            color:#4e4e4e;
+            background: none;
+            overflow: hidden;
+            top: 0;
+            word-wrap: break-word;
+            width: 100%;
+            left: 0;
+            height: 50px;
+
+            @media @mobile {
+                position: absolute;
+                font-size: 20px;
+                height: 75%;
+                word-wrap: break-word;
+                padding: 50px 20px;
+                box-sizing: border-box;
+                background: #2f2f2f;
+                opacity: 0.8;
+                color: white;
+            }
+        }
+
+        .video-description__close-information-button {
+            display: none;
+
+            @media @mobile {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                flex-grow: 1;
+                background: none;
+                border: none;
+                font-size: 18px;
+                color: #fff9f9;
+                cursor: pointer;
+            }
+        }
+
+        .video-description__open-information-button {
+            display: none;
+
+            @media @mobile {
+                background: none;
+                display: block;
+                border: none;
+                transform: rotate(90deg);
+                font-size: 18px;
+                color: #565656;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .video-container__preview {
+        width: 100%;
+    }
+}

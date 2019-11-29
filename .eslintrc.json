@@ -1,0 +1,77 @@
+{   "parser": "babel-eslint",
+    "overrides": [
+        {
+            "files": ["*-test.js","*.spec.js"],
+            "rules": {
+                "no-unused-expressions": "off"
+            }
+        }
+    ],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true,
+        "jest": true,
+        "es6": true
+    },
+    "extends": [
+        "airbnb"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "react-redux"
+    ],
+    "rules": {
+        "react-redux/connect-prefer-named-arguments": 2,
+        "no-console":"off",
+        "react/no-deprecated": "off",
+        "semi-spacing": ["error", {"before": false, "after": true}],
+        "quotes": ["error", "double"],
+        "indent":["error", 4],
+        "padded-blocks":"off",
+        "react/jsx-props-no-spreading": "off",
+        "import/prefer-default-export": "off",
+        "no-trailing-spaces":"error",
+        "keyword-spacing":["error", { "overrides": { "if": { "after": true, "before":true}, "for": { "after": true }, "while": { "after": true } } }],
+        "no-var":"error",
+        "consistent-return": "off",
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
+        "object-property-newline": "error",
+        "max-len":["error", 130],
+        "no-nested-ternary": "off",
+        "react/jsx-indent":"off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/prefer-stateless-function": "off",
+        "comma-dangle": "off",
+        "react/jsx-indent-props": "off",
+        "function-paren-newline": ["error", "consistent"],
+        "react/forbid-prop-types": "off",
+        "react/button-has-type": "off",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/no-array-index-key": "off",
+        "arrow-body-style": "off",
+        "arrow-parens":"off",
+        "totalResult": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "react/destructuring-assignment": "off",
+        "react/prop-types": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "no-alert":"off",
+        "object-curly-newline":"off",
+        "no-else-return":"off",
+        "linebreak-style": "off"
+    }
+}

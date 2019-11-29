@@ -1,0 +1,37 @@
+@mobile: ~"(max-width: 600px)";
+
+.rating-information{
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+
+    .rating-information__block{
+        margin-left: 20px;
+        text-align: center;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        .item__icon{
+            color:rgb(61, 61, 61);
+            font-size: 25px;
+
+            @media @mobile {
+                font-size: 21px;
+            }
+        }
+
+        .item__count{
+            margin-top: 5px;
+
+            @media @mobile {
+                font-size: 13px;
+            }
+        }
+
+        @media @mobile {
+            margin-left: 11px;
+        }
+    }
+}

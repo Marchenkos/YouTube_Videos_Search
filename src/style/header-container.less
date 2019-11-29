@@ -1,0 +1,19 @@
+@black: #2e2e2e;
+@white: #ffffff;
+@mobile: ~"(max-width: 600px)";
+
+.header-container {
+    display: flex;
+    height: 85px;
+    background: @black;
+    color: @white;
+    padding: 0 30px 25px 40px;
+    align-items: flex-end;
+    z-index: 1;
+    position: relative;
+
+    @media @mobile {
+        padding: 5px 25px 5px 25px;
+        align-items: center;
+    }
+}

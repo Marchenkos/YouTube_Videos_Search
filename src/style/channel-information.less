@@ -1,0 +1,31 @@
+@mobile: ~"(max-width: 600px)";
+
+.channel-information{
+    display: flex;
+    align-items: flex-start;
+
+    .channel-information__icon{
+        width: 50px;
+        border-radius: 25px;
+        margin-right: 10px;
+    }
+
+    .channel-information__description-box {
+
+        .description__channel-name{
+            margin: 4px;
+            max-width: 140px;
+
+            @media @mobile {
+                font-size: 15px;
+                word-break: break-word;
+            }
+        }
+        
+        .description__date-publication{
+            font-size: 13px;
+            color: #808080;
+            margin-left: 4px;
+        }
+    }
+}

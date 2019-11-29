@@ -1,0 +1,29 @@
+@mobile: ~"(max-width: 600px)";
+
+.spinner {
+    position: fixed;
+    top: 300px;
+    left: 48%;
+    width: 100px;
+    height: 100px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 12px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: spinner 1.2s linear infinite;
+
+    @media @mobile {
+        left: 40%;
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
